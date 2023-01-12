@@ -1,0 +1,74 @@
+specVersion: v0.1.0
+package:
+  name: subtivity_antelope
+  version: v0.0.1
+  url: https://github.com/pinax-network/pinax-subtivity/chains/antelope
+  doc: Subtivity for Antelope.
+
+imports:
+  antelope: https://github.com/EOS-Nation/firehose-antelope/releases/download/v0.0.3/antelope-v0.0.3.spkg
+  database_change: https://github.com/streamingfast/substreams-database-change/releases/download/v0.1.0/substreams-database-change-v0.1.0.spkg
+  entities_change: https://github.com/streamingfast/substreams-entity-change/releases/download/v0.2.0/substreams-entity-change-v0.2.0.spkg
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ../../target/wasm32-unknown-unknown/release/subtivity_antelope.wasm
+
+modules:
+  - name: map_block_stats
+    kind: map
+    initialBlock: 2
+    inputs:
+      - source: sf.antelope.type.v2.Block
+    output:
+      type: proto:subtivity.v1.BlockStats
+
+  - name: store_trx_count
+    kind: store
+    updatePolicy: add
+    valueType: int64
+    inputs:
+      - map: map_block_stats
+
+  - name: store_act_count
+    kind: store
+    updatePolicy: add
+    valueType: int64
+    inputs:
+      - map: map_block_stats
+
+  - name: store_max_trx_count
+    kind: store
+    updatePolicy: max
+    valueType: int64
+    inputs:
+      - map: map_block_stats
+
+  - name: store_max_action_count
+    kind: store
+    updatePolicy: max
+    valueType: int64
+    inputs:
+      - map: map_block_stats
+
+  - name: map_hourly_stats
+    kind: map
+    inputs:
+      - map: map_block_stats
+      - store: store_trx_count
+      - store: store_act_count
+    output:
+      type: proto:antelope.subtivity.v1.HourlyStats
+
+  - name: db_out
+    kind: map
+    inputs:
+      - map: map_block_stats
+      - map: map_hourly_stats
+#      - store: store_max_trx_count
+#        mode: deltas
+#      - store: store_max_action_count
+#        mode: deltas
+    output:
+      type: proto:sf.substreams.database.v1.DatabaseChanges

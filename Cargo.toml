@@ -1,0 +1,15 @@
+[workspace]
+members = [
+    "chains/*",
+    "common",
+]
+
+[workspace.dependencies]
+substreams = "0.5.0"
+substreams-database-change = "1.0.0"
+substreams-entity-change = "1.0.0"
+
+[profile.release]
+lto = true
+opt-level = 's'
+strip = "debuginfo"

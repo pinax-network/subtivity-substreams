@@ -1,0 +1,19 @@
+[package]
+name = "subtivity_antelope"
+version = "0.1.0"
+description = "Subtivity for Antelope"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+prost = { version = "0.11.2" }
+prost-types = "0.11.2"
+substreams-database-change =  { workspace = true }
+substreams-entity-change =  { workspace = true }
+substreams = { workspace = true }
+substreams-antelope-core = "0.0.4"
+
+# [build-dependencies]
+# subtivity-common = { path = "../../common" }
