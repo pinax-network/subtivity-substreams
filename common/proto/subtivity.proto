@@ -2,24 +2,15 @@ syntax = "proto3";
 
 package subtivity.v1;
 
-import "google/protobuf/timestamp.proto";
-
-message BlockStats {
-  uint32 block_num = 1;                     // block number
-  google.protobuf.Timestamp timestamp = 2;  // block creation timestamp (UTC)
-  int64 trx_count = 3;                      // number of successfully executed transactions in this block
-  int64 act_count = 4;                      // number of successfully executed actions in this block
-  string chain = 5;                         // the blockchain we are running on
-}
-
-message HourlyStats {
-  uint32 block_num = 1;                     // start block number of the accumulated interval
-  google.protobuf.Timestamp timestamp = 2;  // block creation timestamp (UTC) of the start block
-  int64 trx_count = 3;                      // number of successfully executed transactions in the interval
-  int64 act_count = 4;                      // number of successfully executed actions in the interval
-  string chain = 5;                         // the blockchain we are running on
+message Stat {
+  string chain = 1;                         // the blockchain we are running on
+  int64 timestamp = 2;                      // (primary key) block creation timestamp in seconds (UTC) of the start block
+  uint32 block_num = 3;                     // start block number of the accumulated interval
+  string block_id = 4;                      // start block ID of the accumulated interval
+  int64 transaction_traces_count = 5;       // number of successfully executed transactions in the interval
+  int64 executed_total_action_count = 6;    // number of successfully executed actions in the interval
 }
 
 message Stats {
-  repeated HourlyStats stats = 1;
+  repeated Stat stats = 1;
 }

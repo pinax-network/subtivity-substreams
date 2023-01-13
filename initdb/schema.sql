@@ -1,26 +1,25 @@
-create table hourly_stats
+CREATE TABLE hourly_stats
 (
-    block_num bigint not null
-        constraint stats_pk primary key,
-    chain text not null,
-    trx_count integer not null,
-    act_count integer not null
+    id              INTEGER NOT NULL CONSTRAINT stats_pk PRIMARY KEY,
+    block_num       BIGINT,
+    chain           TEXT NOT NULL,
+    traces_count    INTEGER NOT NULL,
+    action_count    INTEGER NOT NULL
 );
 
-create table cursors
+CREATE TABLE cursors
 (
-    id        text not null
-        constraint cursor_pk primary key,
-    cursor    text,
-    block_num bigint,
-    block_id  text
+    id          TEXT NOT NULL CONSTRAINT cursor_pk PRIMARY KEY,
+    cursor      TEXT,
+    block_num   BIGINT,
+    block_id    TEXT
 );
 
-create table last_block
-(
-    chain     text    not null
-        constraint last_block_pk primary key,
-    block_num bigint  not null,
-    trx_count integer not null,
-    act_count integer not null
-);
+-- CREATE table last_block
+-- (
+--     chain     text    not null
+--         constraint last_block_pk primary key,
+--     block_num bigint  not null,
+--     trx_count integer not null,
+--     act_count integer not null
+-- );
