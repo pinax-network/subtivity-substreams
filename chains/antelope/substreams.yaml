@@ -1,7 +1,7 @@
 specVersion: v0.1.0
 package:
   name: subtivity_antelope
-  version: v0.0.1
+  version: v0.1.0
   url: https://github.com/pinax-network/pinax-subtivity/chains/antelope
   doc: Subtivity for Antelope.
 
@@ -16,14 +16,6 @@ binaries:
     file: ../../target/wasm32-unknown-unknown/release/subtivity_antelope.wasm
 
 modules:
-  # - name: map_block_stats
-  #   kind: map
-  #   initialBlock: 2
-  #   inputs:
-  #     - source: sf.antelope.type.v2.Block
-  #   output:
-  #     type: proto:subtivity.v1.Stat
-
   - name: store_traces_count
     kind: store
     updatePolicy: add
@@ -46,33 +38,3 @@ modules:
       - store: store_action_count
     output:
       type: proto:sf.substreams.database.v1.DatabaseChanges
-
-#   - name: store_act_count
-#     kind: store
-#     updatePolicy: add
-#     valueType: int64
-#     inputs:
-#       - map: map_block_stats
-
-#   - name: store_max_trx_count
-#     kind: store
-#     updatePolicy: max
-#     valueType: int64
-#     inputs:
-#       - map: map_block_stats
-
-#   - name: store_max_action_count
-#     kind: store
-#     updatePolicy: max
-#     valueType: int64
-#     inputs:
-#       - map: map_block_stats
-
-#   - name: map_hourly_stats
-#     kind: map
-#     inputs:
-#       - map: map_block_stats
-#       - store: store_trx_count
-#       - store: store_act_count
-#     output:
-#       type: proto:antelope.subtivity.v1.Stats
