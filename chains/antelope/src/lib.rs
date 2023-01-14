@@ -50,7 +50,7 @@ pub fn db_out(
         .change("chain", (chain.clone(), chain.clone()))
         .change("block_num", (0, block.number))
         .change("seconds", (0, seconds))
-        .change("interval", (0, 0))
+        .change("interval", (0, 1))
         .change("traces_count", (0, store_traces_count.get_at(1, keyer::get_second_key(seconds)) ))
         .change("action_count", (0, store_action_count.get_at(1, keyer::get_second_key(seconds)) ));
     

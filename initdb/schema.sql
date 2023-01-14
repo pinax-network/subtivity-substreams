@@ -16,12 +16,3 @@ CREATE TABLE cursors
     block_num   BIGINT,
     block_id    TEXT
 );
-
--- CREATE table last_block
--- (
---     chain     text    not null
---         constraint last_block_pk primary key,
---     block_num bigint  not null,
---     trx_count integer not null,
---     act_count integer not null
--- );
