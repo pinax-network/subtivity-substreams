@@ -1,6 +1,6 @@
 CREATE TABLE stats
 (
-    id              INTEGER NOT NULL CONSTRAINT stats_pk PRIMARY KEY,
+    id              TEXT NOT NULL CONSTRAINT stats_pk PRIMARY KEY,
     chain           TEXT NOT NULL,
     block_num       INTEGER NOT NULL,
     seconds         INTEGER NOT NULL,
