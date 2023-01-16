@@ -12,6 +12,7 @@ prost = { version = "0.11.2" }
 prost-types = "0.11.2"
 substreams-database-change =  { workspace = true }
 substreams-entity-change =  { workspace = true }
+substreams-sink-kv = { workspace = true }
 substreams = { workspace = true }
 substreams-antelope-core = "0.0.4"
 

@@ -2,6 +2,7 @@ use substreams::{prelude::*, log};
 use substreams::errors::Error;
 use substreams_database_change::pb::database::{table_change::Operation, DatabaseChanges};
 use substreams_antelope_core::pb::antelope::{Block};
+use substreams_sink_kv::pb::kv::KvOperations;
 
 mod keyer;
 
@@ -55,4 +56,14 @@ pub fn db_out(
         .change("action_count", (0, store_action_count.get_at(1, keyer::get_second_key(seconds)) ));
     
     Ok(database_changes)
+}
+
+#[substreams::handlers::map]
+pub fn kv_out( block: Block ) -> Result<KvOperations, Error> {
+
+    let mut kv_ops: KvOperations = Default::default();
+
+    kv_ops.push_new(block.number.to_string(), block.id, 1);
+
+    Ok(kv_ops)
 }

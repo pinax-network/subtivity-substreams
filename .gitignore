@@ -5,6 +5,7 @@ debug/
 release/
 target/
 pkg/
+.DS_Store
 
 # Remove Cargo.lock from gitignore if creating an executable, leave it for libraries
 # More information here https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html
@@ -17,3 +18,4 @@ Cargo.lock
 *.pdb
 *.spkg
 pgdata
+badger_data.db
