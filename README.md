@@ -1,6 +1,6 @@
-# Pinax `Subtivity`
+# `Subtivity` Substreams
 
-> Block level activity per for each supported chain **powered by Pinax**.
+> Block level activity per for each supported chains **powered by Pinax**.
 
 ## Data
 
