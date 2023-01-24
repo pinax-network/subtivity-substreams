@@ -15,6 +15,6 @@ prost-types = "0.11.2"
 # substreams-sink-kv = { workspace = true }
 substreams = { workspace = true }
 substreams-antelope-core = "0.0.4"
-subtivity-common = { path = "../../common" }
+# subtivity-common = { path = "../../common" }
 
 # [build-dependencies]

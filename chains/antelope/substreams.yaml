@@ -15,6 +15,12 @@ binaries:
     type: wasm/rust-v1
     file: ../../target/wasm32-unknown-unknown/release/subtivity_antelope.wasm
 
+protobuf:
+  files:
+    - subtivity.proto
+  importPaths:
+    - ./proto/v1
+
 modules:
   - name: store_traces_count
     kind: store
@@ -30,7 +36,7 @@ modules:
     inputs:
       - source: sf.antelope.type.v2.Block
 
-  - name: map_day_counters
+  - name: map_minute_counters
     kind: map
     inputs:
       - source: sf.antelope.type.v2.Block
@@ -40,6 +46,15 @@ modules:
       type: proto:subtivity.v1.Counters
 
   - name: map_hour_counters
+    kind: map
+    inputs:
+      - source: sf.antelope.type.v2.Block
+      - store: store_traces_count
+      - store: store_action_count
+    output:
+      type: proto:subtivity.v1.Counters
+
+  - name: map_day_counters
     kind: map
     inputs:
       - source: sf.antelope.type.v2.Block

@@ -1,12 +1,13 @@
 use substreams::{prelude::*, log};
 use substreams::errors::Error;
 use substreams_antelope_core::pb::antelope::{Block};
-use subtivity_common::subtivity::{Counter, Counters};
 
 // use substreams_database_change::pb::database::{table_change::Operation, DatabaseChanges};
 // use substreams_sink_kv::pb::kv::KvOperations;
 
 mod keyer;
+mod pb;
+use pb::subtivity::{Counter, Counters};
 
 #[substreams::handlers::store]
 fn store_traces_count(block: Block, s: StoreAddInt64) {
@@ -15,7 +16,7 @@ fn store_traces_count(block: Block, s: StoreAddInt64) {
     log::debug!("block {}: seconds {}: adding transaction traces count {}", block.number, seconds, traces_count);
 
     // s.add(1, keyer::get_second_key(seconds), traces_count);
-    // s.add(1, keyer::get_minute_key(seconds), traces_count);
+    s.add(1, keyer::get_minute_key(seconds), traces_count);
     s.add(1, keyer::get_hour_key(seconds), traces_count);
     s.add(1, keyer::get_day_key(seconds), traces_count);
     s.add(1, keyer::get_week_key(seconds), traces_count);
@@ -29,11 +30,20 @@ fn store_action_count(block: Block, s: StoreAddInt64) {
     log::debug!("block {}: seconds {}: adding executed total action count {}", block.number, seconds, action_count);
 
     // s.add(1, keyer::get_second_key(seconds), action_count);
-    // s.add(1, keyer::get_minute_key(seconds), action_count);
+    s.add(1, keyer::get_minute_key(seconds), action_count);
     s.add(1, keyer::get_hour_key(seconds), action_count);
     s.add(1, keyer::get_day_key(seconds), action_count);
     s.add(1, keyer::get_week_key(seconds), action_count);
     s.add(1, keyer::get_all_key(), action_count)
+}
+
+#[substreams::handlers::map]
+pub fn map_minute_counters(
+    block: Block,
+    store_traces_count: StoreGetInt64,
+    store_action_count: StoreGetInt64
+) -> Result<Counters, Error> {
+    computer_counters(block, store_traces_count, store_action_count, "minute", keyer::MINUTE)
 }
 
 #[substreams::handlers::map]
@@ -72,20 +82,20 @@ fn computer_counters(
 ) -> Result<Counters, Error> {
     // global counters
     let mut counters = vec![];
-    let mut seconds = keyer::to_seconds(block.clone()) - interval; // start at -1 interval
+    let mut seconds = keyer::get_rem_euclid(keyer::to_seconds(block.clone()) - interval, interval); // -1 interval to get the previous interval
     let mut max_counters = 730; // 30 days / 2 years / 14 years
-
+    
     // get global counters
     let traces_count = store_traces_count.get_at(1, keyer::get_all_key());
     let action_count = store_action_count.get_at(1, keyer::get_all_key());
-
+    
     // break if global counters are not available
     if traces_count.is_none() || action_count.is_none() { return Ok(Counters::default()) }
-
+    
     // generate daily counters
     while max_counters > 0 {
         // get counters
-        let key = keyer::get_key(suffix, seconds, interval).to_string();
+        let key = keyer::get_key(suffix, seconds, interval);
         let traces_count = store_traces_count.get_at(1, &key);
         let action_count = store_action_count.get_at(1, &key);
 
@@ -105,8 +115,6 @@ fn computer_counters(
     }
 
     Ok(Counters{
-        total_action_count: action_count.unwrap(),
-        total_traces_count: traces_count.unwrap(),
         counters
     })
 }

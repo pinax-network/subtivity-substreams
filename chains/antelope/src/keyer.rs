@@ -74,6 +74,16 @@ fn seconds_7200() {
     assert_eq!("week:0", get_week_key(seconds));
 }
 
+
+#[test]
+fn seconds_7201() {
+    let seconds = 7201;
+    assert_eq!("minute:7200", get_minute_key(seconds));
+    assert_eq!("hour:7200", get_hour_key(seconds));
+    assert_eq!("day:0", get_day_key(seconds));
+    assert_eq!("week:0", get_week_key(seconds));
+}
+
 #[test]
 fn seconds_1209600() {
     let seconds = 1209600;
