@@ -30,7 +30,25 @@ modules:
     inputs:
       - source: sf.antelope.type.v2.Block
 
-  - name: map_daily_counters
+  - name: map_day_counters
+    kind: map
+    inputs:
+      - source: sf.antelope.type.v2.Block
+      - store: store_traces_count
+      - store: store_action_count
+    output:
+      type: proto:subtivity.v1.Counters
+
+  - name: map_hour_counters
+    kind: map
+    inputs:
+      - source: sf.antelope.type.v2.Block
+      - store: store_traces_count
+      - store: store_action_count
+    output:
+      type: proto:subtivity.v1.Counters
+
+  - name: map_week_counters
     kind: map
     inputs:
       - source: sf.antelope.type.v2.Block

@@ -3,7 +3,9 @@ syntax = "proto3";
 package subtivity.v1;
 
 message Counters {
-  repeated Counter items = 1;
+  int64 total_traces_count = 1;
+  int64 total_action_count = 2;
+  repeated Counter counters = 3;
 }
 
 message Counter {

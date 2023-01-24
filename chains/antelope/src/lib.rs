@@ -16,9 +16,9 @@ fn store_traces_count(block: Block, s: StoreAddInt64) {
 
     // s.add(1, keyer::get_second_key(seconds), traces_count);
     // s.add(1, keyer::get_minute_key(seconds), traces_count);
-    // s.add(1, keyer::get_hour_key(seconds), traces_count);
+    s.add(1, keyer::get_hour_key(seconds), traces_count);
     s.add(1, keyer::get_day_key(seconds), traces_count);
-    // s.add(1, keyer::get_week_key(seconds), traces_count);
+    s.add(1, keyer::get_week_key(seconds), traces_count);
     s.add(1, keyer::get_all_key(), traces_count)
 }
 
@@ -30,36 +30,85 @@ fn store_action_count(block: Block, s: StoreAddInt64) {
 
     // s.add(1, keyer::get_second_key(seconds), action_count);
     // s.add(1, keyer::get_minute_key(seconds), action_count);
-    // s.add(1, keyer::get_hour_key(seconds), action_count);
+    s.add(1, keyer::get_hour_key(seconds), action_count);
     s.add(1, keyer::get_day_key(seconds), action_count);
-    // s.add(1, keyer::get_week_key(seconds), action_count);
+    s.add(1, keyer::get_week_key(seconds), action_count);
     s.add(1, keyer::get_all_key(), action_count)
 }
 
 #[substreams::handlers::map]
-pub fn map_daily_counters(
+pub fn map_hour_counters(
     block: Block,
     store_traces_count: StoreGetInt64,
     store_action_count: StoreGetInt64
 ) -> Result<Counters, Error> {
-    let mut response = vec![];
-    let mut seconds = keyer::to_seconds(block.clone());
-    
-    loop {
-        let key = keyer::get_day_key(seconds);
+    computer_counters(block, store_traces_count, store_action_count, "hour", keyer::HOUR)
+}
+
+#[substreams::handlers::map]
+pub fn map_day_counters(
+    block: Block,
+    store_traces_count: StoreGetInt64,
+    store_action_count: StoreGetInt64
+) -> Result<Counters, Error> {
+    computer_counters(block, store_traces_count, store_action_count, "day", keyer::DAY)
+}
+
+#[substreams::handlers::map]
+pub fn map_week_counters(
+    block: Block,
+    store_traces_count: StoreGetInt64,
+    store_action_count: StoreGetInt64
+) -> Result<Counters, Error> {
+    computer_counters(block, store_traces_count, store_action_count, "week", keyer::WEEK)
+}
+
+fn computer_counters(
+    block: Block,
+    store_traces_count: StoreGetInt64,
+    store_action_count: StoreGetInt64,
+    suffix: &str,
+    interval: i64
+) -> Result<Counters, Error> {
+    // global counters
+    let mut counters = vec![];
+    let mut seconds = keyer::to_seconds(block.clone()) - interval; // start at -1 interval
+    let mut max_counters = 730; // 30 days / 2 years / 14 years
+
+    // get global counters
+    let traces_count = store_traces_count.get_at(1, keyer::get_all_key());
+    let action_count = store_action_count.get_at(1, keyer::get_all_key());
+
+    // break if global counters are not available
+    if traces_count.is_none() || action_count.is_none() { return Ok(Counters::default()) }
+
+    // generate daily counters
+    while max_counters > 0 {
+        // get counters
+        let key = keyer::get_key(suffix, seconds, interval).to_string();
         let traces_count = store_traces_count.get_at(1, &key);
         let action_count = store_action_count.get_at(1, &key);
-        if traces_count.is_none() || action_count.is_none() { break; }
 
-        response.push(Counter {
+        // break if counters are not available
+        if traces_count.is_none() || action_count.is_none() { break; }
+        
+        // add counter
+        counters.push(Counter {
             seconds,
             action_count: action_count.unwrap(),
             traces_count: traces_count.unwrap(),
         });
-        seconds -= 86400;
+
+        // next counter
+        seconds -= interval;
+        max_counters -= 1;
     }
 
-    Ok(Counters{items: response})
+    Ok(Counters{
+        total_action_count: action_count.unwrap(),
+        total_traces_count: traces_count.unwrap(),
+        counters
+    })
 }
 
 // #[substreams::handlers::map]

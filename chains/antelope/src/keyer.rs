@@ -16,40 +16,44 @@ pub fn to_nanos(block: Block) -> i32 {
     block.header.as_ref().unwrap().timestamp.clone().unwrap().nanos
 }
 
-pub fn get_database_key(chain: String, interval: i64, seconds: i64) -> String {
-    format!("stats:{}:{}:{}", chain, interval, seconds ) // stats:EOS:86400:1673654400
-}
+// pub fn get_database_key(chain: String, interval: i64, seconds: i64) -> String {
+//     format!("stats:{}:{}:{}", chain, interval, seconds ) // stats:EOS:86400:1673654400
+// }
 
 pub fn get_second_key(seconds: i64) -> String {
-    format!("second:{}", get_key(seconds, SECOND))
+    get_key("second", seconds, SECOND)
 }
 
 pub fn get_minute_key(seconds: i64) -> String {
-    format!("minute:{}", get_key(seconds, MINUTE))
+    get_key("minute", seconds, MINUTE)
 }
 
 pub fn get_hour_key(seconds: i64) -> String {
-    format!("hour:{}", get_key(seconds, HOUR))
+    get_key("hour", seconds, HOUR)
 }
 
 pub fn get_day_key(seconds: i64) -> String {
-    format!("day:{}", get_key(seconds, DAY))
+    get_key("day", seconds, DAY)
 }
 
 pub fn get_week_key(seconds: i64) -> String {
-    format!("week:{}", get_key(seconds, WEEK))
+    get_key("week", seconds, WEEK)
 }
 
 pub fn get_all_key() -> String {
     "all".to_string()
 }
 
-pub fn get_key(timestamp: i64, interval: i64) -> i64 {
-    return if timestamp % interval == 0 {
-        timestamp.clone()
+pub fn get_rem_euclid(seconds: i64, interval: i64) -> i64 {
+    return if seconds % interval == 0 {
+        seconds.clone()
     } else {
-        timestamp.clone() - timestamp.rem_euclid(interval)
+        seconds.clone() - seconds.rem_euclid(interval)
     };
+}
+
+pub fn get_key(suffix: &str, seconds: i64, interval: i64) -> String {
+    format!("{}:{}", suffix, get_rem_euclid(seconds, interval).to_string())
 }
 
 #[test]
