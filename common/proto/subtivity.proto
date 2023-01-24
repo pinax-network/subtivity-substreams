@@ -2,15 +2,12 @@ syntax = "proto3";
 
 package subtivity.v1;
 
-message Stat {
-  string chain = 1;                         // the blockchain we are running on
-  int64 timestamp = 2;                      // (primary key) block creation timestamp in seconds (UTC) of the start block
-  uint32 block_num = 3;                     // start block number of the accumulated interval
-  string block_id = 4;                      // start block ID of the accumulated interval
-  int64 transaction_traces_count = 5;       // number of successfully executed transactions in the interval
-  int64 executed_total_action_count = 6;    // number of successfully executed actions in the interval
+message Counters {
+  repeated Counter items = 1;
 }
 
-message Stats {
-  repeated Stat stats = 1;
+message Counter {
+  int64 seconds = 1;
+  int64 traces_count = 2;
+  int64 action_count = 3;
 }

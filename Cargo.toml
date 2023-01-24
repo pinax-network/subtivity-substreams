@@ -6,9 +6,9 @@ members = [
 
 [workspace.dependencies]
 substreams = "0.5.0"
-substreams-sink-kv = "0.1.1"
-substreams-database-change = "1.0.0"
-substreams-entity-change = "1.0.0"
+# substreams-sink-kv = "0.1.1"
+# substreams-database-change = "1.0.0"
+# substreams-entity-change = "1.0.0"
 
 [profile.release]
 lto = true

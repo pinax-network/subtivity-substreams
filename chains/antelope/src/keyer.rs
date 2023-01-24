@@ -1,3 +1,5 @@
+#![allow(dead_code, unused)]
+
 use substreams_antelope_core::pb::antelope::{Block};
 
 pub static SECOND: i64 = 1;
