@@ -6,8 +6,10 @@ package:
   doc: Subtivity for Antelope.
 
 imports:
-  antelope: https://github.com/pinax-network/firehose-antelope/releases/download/v0.0.4/antelope-v0.0.4.spkg
   store_antelope: ../../stores/antelope/subtivity-store-antelope-v0.1.0.spkg
+  # antelope: https://github.com/pinax-network/firehose-antelope/releases/download/v0.0.4/antelope-v0.0.4.spkg
+
+# imports:
 #   # database_change: https://github.com/streamingfast/substreams-database-change/releases/download/v0.1.0/substreams-database-change-v0.1.0.spkg
 #   # entities_change: https://github.com/streamingfast/substreams-entity-change/releases/download/v0.2.0/substreams-entity-change-v0.2.0.spkg
 

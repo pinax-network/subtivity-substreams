@@ -3,7 +3,7 @@
 ### Quickstart
 
 ```
-$ substreams run -e eos.firehose.eosnation.io:9001 substreams.yaml db_out --stop-block 10000 --production-mode
+$ substreams run -e eos.firehose.eosnation.io:9001 substreams.yaml map_counters -s 172800 -t +1 --production-mode
 ```
 
 ### Graph
@@ -14,30 +14,37 @@ graph TD;
   sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> store_traces_count
   store_action_count[store: store_action_count]
   sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> store_action_count
-  db_out[map: db_out]
-  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> db_out
+  map_counters[map: map_counters]
+  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_counters
+  store_traces_count --> map_counters
+  store_action_count --> map_counters
 ```
 
 ### Modules
 
 ```yaml
+Package name: subtivity_store_antelope
+Version: v0.1.0
+Doc: Subtivity Store for Antelope.
+Modules:
+----
 Name: store_traces_count
 Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: 67d4cf7409fe14dd0d12c20135cb24a27c62d088
+Hash: 91b044395a123c29005b48a8aa5c17e4f27c2ec5
 
 Name: store_action_count
 Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: 2d98d1429a8f2c8135e9ff7357e6404a188c89e3
+Hash: b95592a900a0459292c47bea4b6aece3479e260d
 
-Name: db_out
+Name: map_counters
 Initial block: 0
 Kind: map
-Output Type: proto:sf.substreams.database.v1.DatabaseChanges
-Hash: 48acec56e03db12ed576037be9c1a76d8c941323
+Output Type: proto:subtivity.v1.Counters
+Hash: d9bb6ef6f6dca4df545d8c7041a30ed866f32188
 ```
