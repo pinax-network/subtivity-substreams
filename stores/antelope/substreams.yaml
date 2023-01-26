@@ -5,9 +5,6 @@ package:
   url: https://github.com/pinax-network/pinax-subtivity/chains/antelope
   doc: Subtivity Store for Antelope.
 
-# imports:
-#   antelope: https://github.com/pinax-network/firehose-antelope/releases/download/v0.0.4/antelope-v0.0.4.spkg
-
 binaries:
   default:
     type: wasm/rust-v1
