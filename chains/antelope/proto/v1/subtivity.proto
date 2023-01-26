@@ -3,11 +3,12 @@ syntax = "proto3";
 package subtivity.v1;
 
 message Counters {
-  repeated Counter counters = 2;
+  repeated Counter counters = 1;
 }
 
 message Counter {
-  int64 seconds = 1;
-  int64 traces_count = 2;
-  int64 action_count = 3;
+  string name = 1;
+  int64 interval = 2;
+  int64 seconds = 3;
+  int64 count = 4;
 }

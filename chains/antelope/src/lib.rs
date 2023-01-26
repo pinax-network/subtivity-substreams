@@ -1,154 +1,51 @@
-use substreams::{prelude::*, log};
+use substreams::{prelude::*};
 use substreams::errors::Error;
-use substreams_antelope_core::pb::antelope::{Block};
+use substreams_antelope::pb::antelope::{Block};
 
 // use substreams_database_change::pb::database::{table_change::Operation, DatabaseChanges};
 // use substreams_sink_kv::pb::kv::KvOperations;
 
 mod keyer;
+mod getter;
+mod store;
 mod pb;
-use pb::subtivity::{Counter, Counters};
-
-#[substreams::handlers::store]
-fn store_traces_count(block: Block, s: StoreAddInt64) {
-    let traces_count = block.transaction_traces_count() as i64;
-    let seconds = keyer::to_seconds(block.clone());
-    log::debug!("block {}: seconds {}: adding transaction traces count {}", block.number, seconds, traces_count);
-
-    // s.add(1, keyer::get_second_key(seconds), traces_count);
-    s.add(1, keyer::get_minute_key(seconds), traces_count);
-    s.add(1, keyer::get_hour_key(seconds), traces_count);
-    s.add(1, keyer::get_day_key(seconds), traces_count);
-    s.add(1, keyer::get_week_key(seconds), traces_count);
-    s.add(1, keyer::get_all_key(), traces_count)
-}
-
-#[substreams::handlers::store]
-fn store_action_count(block: Block, s: StoreAddInt64) {
-    let action_count = block.executed_total_action_count() as i64;
-    let seconds = keyer::to_seconds(block.clone());
-    log::debug!("block {}: seconds {}: adding executed total action count {}", block.number, seconds, action_count);
-
-    // s.add(1, keyer::get_second_key(seconds), action_count);
-    s.add(1, keyer::get_minute_key(seconds), action_count);
-    s.add(1, keyer::get_hour_key(seconds), action_count);
-    s.add(1, keyer::get_day_key(seconds), action_count);
-    s.add(1, keyer::get_week_key(seconds), action_count);
-    s.add(1, keyer::get_all_key(), action_count)
-}
+use pb::subtivity::{Counters};
 
 #[substreams::handlers::map]
-pub fn map_minute_counters(
-    block: Block,
-    store_traces_count: StoreGetInt64,
-    store_action_count: StoreGetInt64
-) -> Result<Counters, Error> {
-    computer_counters(block, store_traces_count, store_action_count, "minute", keyer::MINUTE)
-}
-
-#[substreams::handlers::map]
-pub fn map_hour_counters(
-    block: Block,
-    store_traces_count: StoreGetInt64,
-    store_action_count: StoreGetInt64
-) -> Result<Counters, Error> {
-    computer_counters(block, store_traces_count, store_action_count, "hour", keyer::HOUR)
-}
-
-#[substreams::handlers::map]
-pub fn map_day_counters(
-    block: Block,
-    store_traces_count: StoreGetInt64,
-    store_action_count: StoreGetInt64
-) -> Result<Counters, Error> {
-    computer_counters(block, store_traces_count, store_action_count, "day", keyer::DAY)
-}
-
-#[substreams::handlers::map]
-pub fn map_week_counters(
-    block: Block,
-    store_traces_count: StoreGetInt64,
-    store_action_count: StoreGetInt64
-) -> Result<Counters, Error> {
-    computer_counters(block, store_traces_count, store_action_count, "week", keyer::WEEK)
-}
-
-fn computer_counters(
-    block: Block,
-    store_traces_count: StoreGetInt64,
-    store_action_count: StoreGetInt64,
-    suffix: &str,
-    interval: i64
-) -> Result<Counters, Error> {
-    // global counters
-    let mut counters = vec![];
-    let mut seconds = keyer::get_rem_euclid(keyer::to_seconds(block.clone()) - interval, interval); // -1 interval to get the previous interval
-    let mut max_counters = 730; // 30 days / 2 years / 14 years
-    
-    // get global counters
-    let traces_count = store_traces_count.get_at(1, keyer::get_all_key());
-    let action_count = store_action_count.get_at(1, keyer::get_all_key());
-    
-    // break if global counters are not available
-    if traces_count.is_none() || action_count.is_none() { return Ok(Counters::default()) }
-    
-    // generate daily counters
-    while max_counters > 0 {
-        // get counters
-        let key = keyer::get_key(suffix, seconds, interval);
-        let traces_count = store_traces_count.get_at(1, &key);
-        let action_count = store_action_count.get_at(1, &key);
-
-        // break if counters are not available
-        if traces_count.is_none() || action_count.is_none() { break; }
-        
-        // add counter
-        counters.push(Counter {
-            seconds,
-            action_count: action_count.unwrap(),
-            traces_count: traces_count.unwrap(),
-        });
-
-        // next counter
-        seconds -= interval;
-        max_counters -= 1;
-    }
-
-    Ok(Counters{
-        counters
-    })
+pub fn map_counters(block: Block, store_traces_count: StoreGetInt64, store_action_count: StoreGetInt64) -> Result<Counters, Error> {
+    let counters = getter::get_counters(block, store_traces_count, store_action_count);
+    if counters.is_none() { return Ok(Default::default()) }
+    Ok(counters.unwrap())
 }
 
 // #[substreams::handlers::map]
-// pub fn db_out(
-//     block: Block,
-//     store_traces_count: StoreGetInt64,
-//     store_action_count: StoreGetInt64
-// ) -> Result<DatabaseChanges, Error> {
+// pub fn db_out(map_counters: Counters) -> Result<DatabaseChanges, Error> {
 //     let mut database_changes: DatabaseChanges = Default::default();
-//     if keyer::to_nanos(block.clone()) != 0 { return Ok(database_changes); } // Antelope Chains have 0.5s block time (skip even blocks)
+    
+//     // // skip blocks
+//     // if keyer::to_nanos(block) > 0 { return Ok(database_changes) } // skip blocks with partial timestamps
 
-//     let seconds = keyer::to_seconds(block.clone());
-//     let chain = "EOS".to_string();
+//     // let traces_count = store_traces_count.get_at(1, key);
+//     // let action_count = store_action_count.get_at(1, key);
 
-//     // stats for each block
-//     database_changes.push_change("stats", &keyer::get_database_key(chain.clone(), keyer::SECOND, seconds), 0, Operation::Create)
-//         .change("chain", (chain.clone(), chain.clone()))
-//         .change("block_num", (0, block.number))
-//         .change("seconds", (0, seconds))
-//         .change("interval", (0, 1))
-//         .change("traces_count", (0, store_traces_count.get_at(1, keyer::get_second_key(seconds)) ))
-//         .change("action_count", (0, store_action_count.get_at(1, keyer::get_second_key(seconds)) ));
+//     // // push to SQL database
+//     // database_changes.push_change("traces", &key, 0, Operation::Create)
+//     //     .change("seconds", (0, seconds))
+//     //     .change("interval", (0, interval))
+//     //     .change("traces_count", (0, store_traces_count.get_at(1, key) ))
+//     //     .change("action_count", (0, store_action_count.get_at(1, key) ));
     
 //     Ok(database_changes)
 // }
 
-// #[substreams::handlers::map]
-// pub fn kv_out( block: Block ) -> Result<KvOperations, Error> {
+// // #[substreams::handlers::map]
+// // pub fn kv_out(map_counters: Counters) -> Result<KvOperations, Error> {
 
-//     let mut kv_ops: KvOperations = Default::default();
+// //     let mut kv_ops: KvOperations = Default::default();
 
-//     kv_ops.push_new(block.number.to_string(), block.id, 1);
-
-//     Ok(kv_ops)
-// }
+// //     for counter in map_counters.iter() {
+// //         let key = keyer::get_key(counter.seconds, counter.interval);
+// //         kv_ops.push_new(key, counter, 1);
+// //     }
+// //     Ok(kv_ops)
+// // }
