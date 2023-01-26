@@ -1,0 +1,13 @@
+[package]
+name = "subtivity_store_antelope"
+version = "0.1.0"
+description = "Subtivity for Antelope Store"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+substreams-antelope = "0.1"
+substreams = { workspace = true }
+subtivity-common = { path = "../../common" }

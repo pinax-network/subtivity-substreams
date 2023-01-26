@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "chains/*",
+    "stores/*",
     "common",
 ]
 
@@ -9,6 +10,8 @@ substreams = "0.5.0"
 substreams-sink-kv = "0.1"
 substreams-database-change = "1.0.0"
 substreams-entity-change = "1.0.0"
+substreams-antelope = "0.1"
+
 
 [profile.release]
 lto = true
