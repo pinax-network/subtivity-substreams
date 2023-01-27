@@ -2,11 +2,10 @@ CREATE TABLE stats
 (
     id              TEXT NOT NULL CONSTRAINT stats_pk PRIMARY KEY,
     chain           TEXT NOT NULL,
-    block_num       INTEGER NOT NULL,
+    name            TEXT NOT NULL,
     seconds         INTEGER NOT NULL,
     interval        INTEGER NOT NULL,
-    traces_count    INTEGER NOT NULL,
-    action_count    INTEGER NOT NULL
+    count           INTEGER NOT NULL,
 );
 
 CREATE TABLE cursors
