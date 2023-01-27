@@ -1,7 +1,7 @@
 use substreams::{prelude::*, log};
 use substreams::errors::Error;
 use substreams_antelope::pb::antelope::{Block};
-use subtivity_common::{keyer, get_counters, Counters};
+use subtivity_common::{BlockSubtivity, keyer, get_counters, Counters};
 use prost_types::Timestamp;
 
 #[substreams::handlers::map]
@@ -13,7 +13,7 @@ pub fn map_counters(block: Block, store_traces_count: StoreGetInt64, store_actio
 }
 
 #[substreams::handlers::store]
-fn store_traces_count(block: Block, s: StoreAddInt64) {
+fn store_traces_count(block: BlockSubtivity, s: StoreAddInt64) {
     let seconds = to_seconds(block.clone());
     let traces_count = block.transaction_traces_count() as i64;
     log::debug!("block {}: seconds {}: adding transaction traces count {}", block.number, seconds, traces_count);
@@ -28,7 +28,7 @@ fn store_traces_count(block: Block, s: StoreAddInt64) {
 }
 
 #[substreams::handlers::store]
-fn store_action_count(block: Block, s: StoreAddInt64) {
+fn store_action_count(block: BlockSubtivity, s: StoreAddInt64) {
     let seconds = to_seconds(block.clone());
     let action_count = block.executed_total_action_count() as i64;
     log::debug!("block {}: seconds {}: adding executed total action count {}", block.number, seconds, action_count);

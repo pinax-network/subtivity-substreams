@@ -1,14 +1,14 @@
 specVersion: v0.1.0
 package:
-  name: subtivity_store_antelope
+  name: subtivity_stores
   version: v0.1.0
-  url: https://github.com/pinax-network/pinax-subtivity/chains/antelope
-  doc: Subtivity Store for Antelope.
+  url: https://github.com/pinax-network/pinax-subtivity
+  doc: Subtivity Stores.
 
 binaries:
   default:
     type: wasm/rust-v1
-    file: ../../target/wasm32-unknown-unknown/release/subtivity_store_antelope.wasm
+    file: ../../target/wasm32-unknown-unknown/release/subtivity_stores.wasm
 
 protobuf:
   files:
@@ -22,20 +22,11 @@ modules:
     updatePolicy: add
     valueType: int64
     inputs:
-      - source: sf.antelope.type.v2.Block
+      - map: subtivity_block_antelope:map_block
 
   - name: store_action_count
     kind: store
     updatePolicy: add
     valueType: int64
     inputs:
-      - source: sf.antelope.type.v2.Block
-
-  - name: map_counters
-    kind: map
-    inputs:
-      - source: sf.antelope.type.v2.Block
-      - store: store_traces_count
-      - store: store_action_count
-    output:
-      type: proto:subtivity.v1.Counters
+      - map: subtivity_block_antelope:map_block

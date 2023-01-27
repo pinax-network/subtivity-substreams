@@ -1,6 +1,7 @@
 [workspace]
 members = [
-    "chains/*",
+    "blocks/*",
+    # "chains/*",
     "stores/*",
     "common",
 ]

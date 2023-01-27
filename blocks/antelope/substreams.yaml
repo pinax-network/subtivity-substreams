@@ -1,0 +1,25 @@
+specVersion: v0.1.0
+package:
+  name: subtivity_block_antelope
+  version: v0.1.0
+  url: https://github.com/pinax-network/pinax-subtivity
+  doc: Subtivity Block for Antelope.
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ../../target/wasm32-unknown-unknown/release/subtivity_block_antelope.wasm
+
+protobuf:
+  files:
+    - subtivity.proto
+  importPaths:
+    - ../../proto/v1
+
+modules:
+  - name: map_block
+    kind: map
+    inputs:
+      - source: sf.antelope.type.v2.Block
+    output:
+      type: proto:subtivity.v1.BlockSubtivity
