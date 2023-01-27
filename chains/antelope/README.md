@@ -25,7 +25,7 @@ graph TD;
 ### Modules
 
 ```yaml
-Package name: subtivity_antelope
+ackage name: subtivity_antelope
 Version: v0.1.0
 Doc: Subtivity for Antelope.
 Modules:
@@ -35,24 +35,24 @@ Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: 91b044395a123c29005b48a8aa5c17e4f27c2ec5
+Hash: 78db987cd8ffe486b0d8e6d001ee429e326338c4
 
 Name: store_action_count
 Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: b95592a900a0459292c47bea4b6aece3479e260d
+Hash: ea5664ef51fcd1df33d41a25ce2243399717d89c
 
 Name: map_counters
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.Counters
-Hash: d9bb6ef6f6dca4df545d8c7041a30ed866f32188
+Hash: 2cf1d2bb26e3c0623d4b730471ec515451a2dd67
 
 Name: db_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.database.v1.DatabaseChanges
-Hash: 93405b25892d19e5ac3035f6ef65a853ea740795
+Hash: 3a4f52d19c5934061511f5ef3eb9e89ec2e47bd3
 ```

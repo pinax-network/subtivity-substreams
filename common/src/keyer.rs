@@ -1,7 +1,5 @@
 #![allow(dead_code, unused)]
 
-use substreams_antelope::pb::antelope::{Block};
-
 pub static ZERO: i64 = 1;
 pub static SECOND: i64 = 1;
 pub static MINUTE: i64 = 60;
@@ -9,14 +7,6 @@ pub static HOUR: i64 = 3600;
 pub static DAY: i64 = 86400;
 pub static WEEK: i64 = 604800;
 pub static INTERVALS: [i64; 6] = [ZERO, SECOND, MINUTE, HOUR, DAY, WEEK];
-
-pub fn to_seconds(block: Block) -> i64 {
-    block.header.as_ref().unwrap().timestamp.clone().unwrap().seconds
-}
-
-pub fn to_nanos(block: Block) -> i32 {
-    block.header.as_ref().unwrap().timestamp.clone().unwrap().nanos
-}
 
 pub fn get_all_key() -> String {
     get_key(0, 0)
@@ -98,9 +88,3 @@ fn seconds_1673700000() {
     assert_eq!("86400:1673654400", get_day_key(seconds));
     assert_eq!("604800:1673481600", get_week_key(seconds));
 }
-
-// #[test]
-// fn key_14400() {
-//     assert_eq!(14400, get_key(14400));
-// }
-
