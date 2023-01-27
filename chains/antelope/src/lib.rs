@@ -8,7 +8,7 @@ use subtivity_common::{Counters};
 #[substreams::handlers::map]
 pub fn db_out(map_counters: Counters) -> Result<DatabaseChanges, Error> {
     let mut database_changes: DatabaseChanges = Default::default();
-    let chain = "chain".to_string();
+    let chain = "chain".to_string(); // TO REPLACE: when Substreams supports parameters
 
     // push to SQL database
     for counter in map_counters.counters { 
@@ -29,7 +29,7 @@ pub fn db_out(map_counters: Counters) -> Result<DatabaseChanges, Error> {
 #[substreams::handlers::map]
 pub fn kv_out(map_counters: Counters) -> Result<KvOperations, Error> {
     let mut kv_ops: KvOperations = Default::default();
-    let chain = "chain".to_string();
+    let chain = "chain".to_string(); // TO REPLACE: when Substreams supports parameters
 
     // push to KV database
     for counter in map_counters.counters { 
