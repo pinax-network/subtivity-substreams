@@ -8,6 +8,6 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-substreams-antelope = "0.1"
+substreams-antelope = { workspace = true }
 substreams = { workspace = true }
 subtivity-common = { path = "../../common" }

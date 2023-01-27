@@ -18,7 +18,7 @@ pub fn to_nanos(block: Block) -> i32 {
     block.header.as_ref().unwrap().timestamp.clone().unwrap().nanos
 }
 
-pub fn get_0_key() -> String {
+pub fn get_all_key() -> String {
     get_key(0, 0)
 }
 

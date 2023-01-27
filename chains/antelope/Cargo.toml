@@ -8,10 +8,8 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-prost = { version = "0.11.2" }
-prost-types = "0.11.2"
-substreams-antelope = "0.1"
 substreams = { workspace = true }
+substreams-antelope = { workspace = true }
 substreams-sink-kv = { workspace = true }
 substreams-entity-change =  { workspace = true }
 substreams-database-change =  { workspace = true }
