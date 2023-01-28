@@ -3,7 +3,7 @@
 ### Quickstart
 
 ```
-$ substreams run -e mainnet.eth.streamingfast.io:443 substreams.yaml map_block -t +100 --production-mode
+$ substreams run substreams.yaml map_block -s 16500000 -t +10
 ```
 
 ### Graph
@@ -26,5 +26,5 @@ Name: map_block
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.BlockSubtivity
-Hash: 6329c25a2d18f1de6c09fcffbfac6e33f7180dbc
+Hash: c82ddbb26f660b194707471cecfe0a61f19d1813
 ```

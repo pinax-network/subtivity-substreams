@@ -22,4 +22,4 @@ modules:
     inputs:
       - source: sf.antelope.type.v2.Block
     output:
-      type: proto:subtivity.v1.BlockSubtivity
+      type: proto:subtivity.v1.BlockStats

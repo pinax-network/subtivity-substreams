@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package subtivity.v1;
 
-import "google/protobuf/timestamp.proto";
-
 message Counters {
   repeated Counter counters = 1;
 }
@@ -15,11 +13,8 @@ message Counter {
   int64 count = 4;
 }
 
-message BlockSubtivity {
-  string chain_id = 1;
-  uint64 block_num = 2;                    // block number
-  google.protobuf.Timestamp timestamp = 3; // block creation timestamp (UTC)
-  int64 traces_count = 4;                  // number of successfully executed transactions in this block
-  int64 action_count = 5;                  // number of successfully executed actions in this block
-  repeated string uaw = 6;                 // list of unique active wallets in this block
+message BlockStats {
+  int64 traces_count = 1;                  // number of successfully executed transactions in this block
+  int64 action_count = 2;                  // number of successfully executed actions in this block
+  repeated string uaw = 3;                 // list of unique active wallets in this block
 }

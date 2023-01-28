@@ -3,7 +3,7 @@
 ### Quickstart
 
 ```
-$ substreams run -e eos.firehose.eosnation.io:9001 substreams.yaml map_block -t +100 --production-mode
+$ substreams run -e eos.firehose.eosnation.io:9001 substreams.yaml map_block -s 290000000 -t +10
 ```
 
 ### Graph
@@ -25,6 +25,6 @@ Modules:
 Name: map_block
 Initial block: 0
 Kind: map
-Output Type: proto:subtivity.v1.BlockSubtivity
-Hash: 5443ccdfd0104ac2750d0ba5c4afa6a7ef5128af
+Output Type: proto:subtivity.v1.BlockStats
+Hash: e212d0a587f9e92b5de0b817f4168dafe2b66b50
 ```

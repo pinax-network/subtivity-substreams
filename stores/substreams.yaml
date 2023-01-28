@@ -1,0 +1,55 @@
+specVersion: v0.1.0
+package:
+  name: subtivity_stores_evm
+  version: v0.1.0
+  url: https://github.com/pinax-network/pinax-subtivity
+  doc: Subtivity Stores for EVM.
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ../target/wasm32-unknown-unknown/release/subtivity_stores.wasm
+
+  subtivity_block:
+    type: wasm/rust-v1
+    file: ../target/wasm32-unknown-unknown/release/subtivity_block_evm.wasm
+
+protobuf:
+  files:
+    - subtivity.proto
+  importPaths:
+    - ../proto/v1
+
+modules:
+  - name: map_block
+    kind: map
+    binary: subtivity_block
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:subtivity.v1.BlockStats
+
+  - name: store_traces_count
+    kind: store
+    updatePolicy: add
+    valueType: int64
+    inputs:
+      - source: sf.substreams.v1.Clock
+      - map: map_block
+
+  - name: store_action_count
+    kind: store
+    updatePolicy: add
+    valueType: int64
+    inputs:
+      - source: sf.substreams.v1.Clock
+      - map: map_block
+
+  - name: map_stores
+    kind: map
+    inputs:
+      - source: sf.substreams.v1.Clock
+      - store: store_action_count
+      - store: store_traces_count
+    output:
+      type: proto:sf.substreams.v1.Clock

@@ -2,7 +2,7 @@
 members = [
     "blocks/*",
     # "chains/*",
-    "stores/*",
+    "stores",
     "common",
 ]
 

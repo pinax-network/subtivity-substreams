@@ -1,24 +1,24 @@
 specVersion: v0.1.0
 package:
-  name: subtivity_antelope
+  name: subtivity_eos
   version: v0.1.0
-  url: https://github.com/pinax-network/pinax-subtivity/chains/antelope
-  doc: Subtivity for Antelope.
+  url: https://github.com/pinax-network/pinax-subtivity
+  doc: Subtivity for EOS.
 
 binaries:
   default:
     type: wasm/rust-v1
-    file: ../../target/wasm32-unknown-unknown/release/subtivity_antelope.wasm
+    file: ../../target/wasm32-unknown-unknown/release/subtivity_eos.wasm
 
   store_antelope:
     type: wasm/rust-v1
-    file: ../../target/wasm32-unknown-unknown/release/subtivity_store_antelope.wasm
+    file: ../../target/wasm32-unknown-unknown/release/subtivity_antelope.wasm
 
 protobuf:
   files:
     - subtivity.proto
   importPaths:
-    - ../../common/proto/v1
+    - ../../../common/proto/v1
 
 modules:
   - name: store_traces_count

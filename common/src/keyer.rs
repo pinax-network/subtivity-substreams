@@ -1,6 +1,6 @@
 #![allow(dead_code, unused)]
 
-pub static ZERO: i64 = 1;
+pub static ZERO: i64 = 0;
 pub static SECOND: i64 = 1;
 pub static MINUTE: i64 = 60;
 pub static HOUR: i64 = 3600;
@@ -33,6 +33,7 @@ pub fn get_week_key(seconds: i64) -> String {
 }
 
 pub fn get_rem_euclid(seconds: i64, interval: i64) -> i64 {
+    if interval == 0 { return 0; }
     return if seconds % interval == 0 {
         seconds.clone()
     } else {
@@ -47,6 +48,7 @@ pub fn get_key(seconds: i64, interval: i64) -> String {
 #[test]
 fn seconds_0() {
     let seconds = 0;
+    assert_eq!("0:0", get_all_key());
     assert_eq!("60:0", get_minute_key(seconds));
     assert_eq!("3600:0", get_hour_key(seconds));
     assert_eq!("86400:0", get_day_key(seconds));
