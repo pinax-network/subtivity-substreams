@@ -1,19 +1,26 @@
-[workspace]
-members = [
-    "blocks/*",
-    # "chains/*",
-    "stores",
-    "common",
-]
+[package]
+name = "subtivity"
+version = "0.1.0"
+description = "Subtivity"
+edition = "2021"
 
-[workspace.dependencies]
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+prost = "0.11"
+prost-types = "0.11"
 substreams = "0.5.0"
 substreams-sink-kv = "0.1"
 substreams-database-change = "1.0.0"
 substreams-entity-change = "1.0.0"
-substreams-antelope = "0.1"
 
-[profile.release]
-lto = true
-opt-level = 's'
-strip = "debuginfo"
+[workspace]
+members = [
+    "blocks/*"
+]
+
+[workspace.dependencies]
+prost = "0.11"
+prost-types = "0.11"
+substreams = "0.5.0"

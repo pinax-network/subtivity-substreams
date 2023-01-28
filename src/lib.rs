@@ -1,7 +1,14 @@
+#[path = "pb/subtivity.v1.rs"]
+#[allow(dead_code)]
+pub mod subtivity;
+pub use self::subtivity::*;
+
+mod keyer;
 use substreams::{prelude::*, log};
 use substreams::errors::Error;
 use substreams::pb::substreams::Clock;
-use subtivity_common::{BlockStats, keyer};
+
+use subtivity::BlockStats;
 
 #[substreams::handlers::map]
 pub fn map_stores(clock: Clock, _store_action_count: StoreGetInt64, _store_traces_count: StoreGetInt64 ) -> Result<Clock, Error> {

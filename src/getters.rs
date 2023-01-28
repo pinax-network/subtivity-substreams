@@ -1,12 +1,3 @@
-#[path = "pb/subtivity.v1.rs"]
-#[allow(dead_code)]
-pub mod subtivity;
-pub use self::subtivity::*;
-
-pub mod keyer;
-pub use self::keyer::*;
-
-use substreams::{prelude::*};
 use prost_types::Timestamp;
 
 pub fn get_counter(timestamp: Timestamp, store: StoreGetInt64, name: &str, interval: i64) -> Option<Counter> {

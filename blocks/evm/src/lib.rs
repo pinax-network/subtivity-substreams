@@ -1,6 +1,10 @@
+#[path = "pb/subtivity.v1.rs"]
+#[allow(dead_code)]
+pub mod pb;
+
 use substreams::errors::Error;
-use subtivity_common::{BlockStats};
 use substreams_ethereum::pb::eth::v2::Block;
+use pb::{BlockStats};
 
 #[substreams::handlers::map]
 pub fn map_block(block: Block) -> Result<BlockStats, Error> {

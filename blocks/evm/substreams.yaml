@@ -3,7 +3,7 @@ package:
   name: subtivity_block_evm
   version: v0.1.0
   url: https://github.com/pinax-network/pinax-subtivity
-  doc: Subtivity Block for EVM.
+  doc: Subtivity Block for EVM
 
 binaries:
   default:

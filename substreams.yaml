@@ -1,24 +1,24 @@
 specVersion: v0.1.0
 package:
-  name: subtivity_stores_evm
+  name: subtivity_evm
   version: v0.1.0
   url: https://github.com/pinax-network/pinax-subtivity
-  doc: Subtivity Stores for EVM.
+  doc: Subtivity for EVM.
 
 binaries:
   default:
     type: wasm/rust-v1
-    file: ../target/wasm32-unknown-unknown/release/subtivity_stores.wasm
+    file: ./target/wasm32-unknown-unknown/release/subtivity.wasm
 
   subtivity_block:
     type: wasm/rust-v1
-    file: ../target/wasm32-unknown-unknown/release/subtivity_block_evm.wasm
+    file: ./target/wasm32-unknown-unknown/release/subtivity_block_evm.wasm
 
 protobuf:
   files:
     - subtivity.proto
   importPaths:
-    - ../proto/v1
+    - proto/v1
 
 modules:
   - name: map_block
