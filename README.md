@@ -18,8 +18,13 @@
 ### Quickstart
 
 ```
-$ substreams run map_stores -s 1000 -t +1
-$ substreams run -e eos.firehose.eosnation.io:9001 substreams.antelope.yaml map_stores -s 1000 -t +1
+$ substreams run map_counters -t +200 -o jsonl
+```
+
+**Running no-ETH chains**
+
+```
+$ substreams run -e <ENDPOINT> substreams.<CHAIN>.yaml map_counters -t +200 -o jsonl
 ```
 
 ### Graph

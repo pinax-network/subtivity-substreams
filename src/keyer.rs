@@ -1,5 +1,7 @@
 #![allow(dead_code, unused)]
 
+use substreams::pb::substreams::Clock;
+
 pub static ZERO: i64 = 0;
 pub static SECOND: i64 = 1;
 pub static MINUTE: i64 = 60;
@@ -43,6 +45,14 @@ pub fn get_rem_euclid(seconds: i64, interval: i64) -> i64 {
 
 pub fn get_key(seconds: i64, interval: i64) -> String {
     format!("{}:{}", interval, get_rem_euclid(seconds, interval).to_string())
+}
+
+pub fn to_seconds(clock: Clock ) -> i64 {
+    clock.timestamp.unwrap().seconds
+}
+
+pub fn to_nanos(clock: Clock ) -> i64 {
+    clock.timestamp.unwrap().seconds
 }
 
 #[test]
