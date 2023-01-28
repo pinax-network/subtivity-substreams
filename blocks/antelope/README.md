@@ -3,7 +3,7 @@
 ### Quickstart
 
 ```
-$ substreams run -e eos.firehose.eosnation.io:9001 substreams.yaml map_block -s 290000000 -t +10
+$ substreams run -e eos.firehose.eosnation.io:9001 map_block -s 290000000 -t +1
 ```
 
 ### Graph

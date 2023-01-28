@@ -3,7 +3,7 @@
 ### Quickstart
 
 ```
-$ substreams run map_block -s 16500000 -t +10
+$ substreams run map_block -s 16500000 -t +1
 ```
 
 ### Graph
