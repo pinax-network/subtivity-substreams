@@ -46,9 +46,6 @@ graph TD;
   map_block --> store_traces_count
   store_action_count[store: store_action_count]
   map_block --> store_action_count
-  map_stores[map: map_stores]
-  store_action_count --> map_stores
-  store_traces_count --> map_stores
   map_counters[map: map_counters]
   store_action_count -- deltas --> map_counters
   store_traces_count -- deltas --> map_counters
@@ -85,12 +82,6 @@ Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
 Hash: 3109137c34821a89bd6f070d7c8474858d220620
-
-Name: map_stores
-Initial block: 0
-Kind: map
-Output Type: proto:sf.substreams.v1.Clock
-Hash: 0a5bb38eefb7dc19e9b24e37c1656334e930c420
 
 Name: map_counters
 Initial block: 0
@@ -138,12 +129,6 @@ Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
 Hash: 7a6cb443e7104b17480ad5863cfc7b1258b67a3a
-
-Name: map_stores
-Initial block: 0
-Kind: map
-Output Type: proto:sf.substreams.v1.Clock
-Hash: 1bf13c98989d24919f6f1636a1e8bedfd082c66a
 
 Name: map_counters
 Initial block: 0

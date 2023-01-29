@@ -47,15 +47,6 @@ modules:
       - source: sf.substreams.v1.Clock
       - map: map_block
 
-  - name: map_stores
-    kind: map
-    inputs:
-      - source: sf.substreams.v1.Clock
-      - store: store_action_count
-      - store: store_traces_count
-    output:
-      type: proto:sf.substreams.v1.Clock
-
   - name: map_counters
     kind: map
     inputs:
