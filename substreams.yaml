@@ -61,7 +61,9 @@ modules:
     inputs:
       - source: sf.substreams.v1.Clock
       - store: store_action_count
+        mode: deltas
       - store: store_traces_count
+        mode: deltas
     output:
       type: proto:subtivity.v1.Counters
 
