@@ -16,7 +16,9 @@ pub fn map_counters(
         let value = delta.new_value;
 
         log::debug!("traces_count delta={:?} clock={:?}", delta, clock);
-        if value == 0 { continue; }
+        if value == 0 {
+            continue;
+        }
         counters.push(Counter { key, value })
     }
 
@@ -25,7 +27,9 @@ pub fn map_counters(
         let value = delta.new_value;
 
         log::debug!("action_count delta={:?} clock={:?}", delta, clock);
-        if value == 0 { continue; }
+        if value == 0 {
+            continue;
+        }
         counters.push(Counter { key, value })
     }
     Ok(Counters { counters })
