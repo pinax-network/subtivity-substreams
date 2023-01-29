@@ -40,11 +40,13 @@ $ substreams run -e <ENDPOINT> substreams.<CHAIN>.yaml map_counters -t +200 -o j
 ```mermaid
 graph TD;
   map_block_stats[map: map_block_stats]
-  sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
   sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block_stats
+  sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
   store_traces_count[store: store_traces_count]
+  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> store_traces_count
   map_block_stats --> store_traces_count
   store_action_count[store: store_action_count]
+  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> store_action_count
   map_block_stats --> store_action_count
   map_counters[map: map_counters]
   store_action_count -- deltas --> map_counters
