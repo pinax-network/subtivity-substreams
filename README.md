@@ -74,30 +74,30 @@ Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: fac467728b1e463082901aa24628d90557340e89
+Hash: a29093257ea8bc6c5b9f0c2b2489fc099d483c3f
 
 Name: store_trace_calls
 Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: 3e65181a248ebd9296ef0b8dad72890f90f42ac7
+Hash: 9e599d84a1fabc850cd8535362ebe760d7a3f1f3
 
 Name: map_counters
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.Counters
-Hash: 1668056164bd149595362309280616fff95f1bac
+Hash: 920c66d65a49abae7212105ebb336fb2ef9e6b3c
 
 Name: kv_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.kv.v1.KVOperations
-Hash: 8c8c64cf89a5869f361d102796f5fa903084ff3c
+Hash: 5ea5cc13a518199eb95e49e4a100f653a4cf0ed6
 
 Name: db_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.database.v1.DatabaseChanges
-Hash: 0387fd275b74a71ea108187be7037e9108a5aaba
+Hash: 41725425562deb9b1cc1f6de56c6d9320dfc5400
 ```

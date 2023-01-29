@@ -7,9 +7,9 @@ pub fn map_counters(store_transaction_traces: Deltas<DeltaInt64>, store_trace_ca
     let mut counters = Vec::new();
 
     for delta in store_transaction_traces.deltas {
-        log::debug!("traces_count delta={:?}", delta);
+        log::debug!("transaction_traces delta={:?}", delta);
 
-        let key = format!("trace_count:{}", delta.key);
+        let key = format!("transaction_traces:{}", delta.key);
         let value = delta.new_value;
         if value > 0 {
             counters.push(Counter { key, value })
@@ -17,9 +17,9 @@ pub fn map_counters(store_transaction_traces: Deltas<DeltaInt64>, store_trace_ca
     }
 
     for delta in store_trace_calls.deltas {
-        log::debug!("action_count delta={:?}", delta);
+        log::debug!("trace_calls delta={:?}", delta);
 
-        let key = format!("trace_count:{}", delta.key);
+        let key = format!("trace_calls:{}", delta.key);
         let value = delta.new_value;
         if value > 0 {
             counters.push(Counter { key, value })
