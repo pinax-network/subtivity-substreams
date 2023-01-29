@@ -5,25 +5,15 @@ use crate::keyer;
 use crate::subtivity::BlockStats;
 
 #[substreams::handlers::store]
-fn store_traces_count(clock: Clock, stats: BlockStats, s: StoreAddInt64) {
-    let seconds = clock.timestamp.unwrap().seconds;
-    log::debug!(
-        "seconds {}: interval: {} adding traces count {}",
-        seconds,
-        keyer::INTERVAL,
-        stats.traces_count
-    );
-    s.add(1, keyer::get_key(seconds, keyer::INTERVAL), stats.traces_count);
+fn store_transaction_traces(clock: Clock, stats: BlockStats, s: StoreAddInt64) {
+    let seconds = clock.clone().timestamp.unwrap().seconds;
+    log::debug!("clock {:?} stats {:?}", clock, stats);
+    s.add(1, keyer::get_key(seconds, keyer::INTERVAL), stats.transaction_traces);
 }
 
 #[substreams::handlers::store]
-fn store_action_count(clock: Clock, stats: BlockStats, s: StoreAddInt64) {
-    let seconds = clock.timestamp.unwrap().seconds;
-    log::debug!(
-        "seconds {}: interval: {} adding action count {}",
-        seconds,
-        keyer::INTERVAL,
-        stats.action_count
-    );
-    s.add(1, keyer::get_key(seconds, keyer::INTERVAL), stats.action_count);
+fn store_trace_calls(clock: Clock, stats: BlockStats, s: StoreAddInt64) {
+    let seconds = clock.clone().timestamp.unwrap().seconds;
+    log::debug!("clock {:?} stats {:?}", clock, stats);
+    s.add(1, keyer::get_key(seconds, keyer::INTERVAL), stats.trace_calls);
 }

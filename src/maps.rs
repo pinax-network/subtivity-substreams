@@ -3,10 +3,10 @@ use substreams::errors::Error;
 use substreams::{log, prelude::*};
 
 #[substreams::handlers::map]
-pub fn map_counters(store_traces_count: Deltas<DeltaInt64>, store_action_count: Deltas<DeltaInt64>) -> Result<Counters, Error> {
+pub fn map_counters(store_transaction_traces: Deltas<DeltaInt64>, store_trace_calls: Deltas<DeltaInt64>) -> Result<Counters, Error> {
     let mut counters = Vec::new();
 
-    for delta in store_traces_count.deltas {
+    for delta in store_transaction_traces.deltas {
         log::debug!("traces_count delta={:?}", delta);
 
         let key = format!("trace_count:{}", delta.key);
@@ -16,7 +16,7 @@ pub fn map_counters(store_traces_count: Deltas<DeltaInt64>, store_action_count: 
         }
     }
 
-    for delta in store_action_count.deltas {
+    for delta in store_trace_calls.deltas {
         log::debug!("action_count delta={:?}", delta);
 
         let key = format!("trace_count:{}", delta.key);

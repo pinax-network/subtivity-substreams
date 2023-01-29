@@ -31,7 +31,7 @@ modules:
     output:
       type: proto:subtivity.v1.BlockStats
 
-  - name: store_traces_count
+  - name: store_transaction_traces
     kind: store
     updatePolicy: add
     valueType: int64
@@ -39,7 +39,7 @@ modules:
       - source: sf.substreams.v1.Clock
       - map: map_block_stats
 
-  - name: store_action_count
+  - name: store_trace_calls
     kind: store
     updatePolicy: add
     valueType: int64
@@ -50,9 +50,9 @@ modules:
   - name: map_counters
     kind: map
     inputs:
-      - store: store_action_count
+      - store: store_trace_calls
         mode: deltas
-      - store: store_traces_count
+      - store: store_transaction_traces
         mode: deltas
     output:
       type: proto:subtivity.v1.Counters

@@ -12,7 +12,7 @@ message Counter {
 }
 
 message BlockStats {
-  int64 traces_count = 1;                  // number of successfully executed transactions in this block
-  int64 action_count = 2;                  // number of successfully executed actions in this block
+  int64 transaction_traces = 1;            // number of successfully executed transactions in this block
+  int64 trace_calls = 2;                   // number of successfully executed actions/trace calls in this block
   repeated string uaw = 3;                 // list of unique active wallets in this block
 }

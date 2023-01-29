@@ -3,7 +3,7 @@
 ### Quickstart
 
 ```
-$ substreams run map_block_stats -s 16500000 -t +1
+$ substreams run map_block_stats -s 16500000 -t +10
 ```
 
 ### Graph
@@ -26,5 +26,5 @@ Name: map_block_stats
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.BlockStats
-Hash: 74fd20f32abf15efed4d319aac71d1d8f8644928
+Hash: 8cf876aff1c5c206d2e7c4dc2186fe614e6d6181
 ```

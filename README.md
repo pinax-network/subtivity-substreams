@@ -40,15 +40,15 @@ $ substreams run -e <ENDPOINT> substreams.<CHAIN>.yaml map_counters -t +200 -o j
 ```mermaid
 graph TD;
   map_block_stats[map: map_block_stats]
-  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block_stats
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
-  store_traces_count[store: store_traces_count]
-  map_block_stats --> store_traces_count
-  store_action_count[store: store_action_count]
-  map_block_stats --> store_action_count
+  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block_stats
+  store_transaction_traces[store: store_transaction_traces]
+  map_block_stats --> store_transaction_traces
+  store_trace_calls[store: store_trace_calls]
+  map_block_stats --> store_trace_calls
   map_counters[map: map_counters]
-  store_action_count -- deltas --> map_counters
-  store_traces_count -- deltas --> map_counters
+  store_trace_calls -- deltas --> map_counters
+  store_transaction_traces -- deltas --> map_counters
   kv_out[map: kv_out]
   map_counters --> kv_out
   db_out[map: db_out]
@@ -67,37 +67,37 @@ Name: map_block_stats
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.BlockStats
-Hash: 74fd20f32abf15efed4d319aac71d1d8f8644928
+Hash: 8cf876aff1c5c206d2e7c4dc2186fe614e6d6181
 
-Name: store_traces_count
+Name: store_transaction_traces
 Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: f5725b6f5a268d1466a7085e5092f727f7e8ed17
+Hash: fac467728b1e463082901aa24628d90557340e89
 
-Name: store_action_count
+Name: store_trace_calls
 Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: 5a887f6317ded06f9997e337dd65b0e1c783c48b
+Hash: 3e65181a248ebd9296ef0b8dad72890f90f42ac7
 
 Name: map_counters
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.Counters
-Hash: 3b08ede52ae6461dba828a0258331e6dc1eafea9
+Hash: 1668056164bd149595362309280616fff95f1bac
 
 Name: kv_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.kv.v1.KVOperations
-Hash: 5574a0d7bfc078c23a9ec06a55d17693bad6d436
+Hash: 8c8c64cf89a5869f361d102796f5fa903084ff3c
 
 Name: db_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.database.v1.DatabaseChanges
-Hash: 67e013577908e933b9989ebb66915f061966f47a
+Hash: 0387fd275b74a71ea108187be7037e9108a5aaba
 ```
