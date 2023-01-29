@@ -1,5 +1,7 @@
 # `Subtivity` Substreams
 
+[<img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/pinax-network/subtivity-substreams/ci.yml?branch=main&style=for-the-badge" height="20">](https://github.com/pinax-network/subtivity-substreams/actions?query=branch%3Amain)
+
 > Block level activity per for each supported chains **powered by Pinax**.
 
 ## Data

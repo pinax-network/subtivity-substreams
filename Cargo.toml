@@ -2,7 +2,12 @@
 name = "subtivity"
 version = "0.1.0"
 description = "Subtivity"
+license = "MIT OR Apache-2.0"
 edition = "2021"
+publish = false
+
+[badges]
+maintenance = { status = "actively-developed" }
 
 [lib]
 crate-type = ["cdylib"]
