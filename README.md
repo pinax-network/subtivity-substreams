@@ -43,13 +43,10 @@ graph TD;
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
   sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block_stats
   store_traces_count[store: store_traces_count]
-  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> store_traces_count
   map_block_stats --> store_traces_count
   store_action_count[store: store_action_count]
-  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> store_action_count
   map_block_stats --> store_action_count
   map_counters[map: map_counters]
-  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> map_counters
   store_action_count -- deltas --> map_counters
   store_traces_count -- deltas --> map_counters
   kv_out[map: kv_out]
