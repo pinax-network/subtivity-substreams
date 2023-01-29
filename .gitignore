@@ -18,4 +18,4 @@ Cargo.lock
 *.pdb
 *.spkg
 pgdata
-badger_data.db
+*.db
