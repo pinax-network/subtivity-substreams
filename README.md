@@ -39,14 +39,17 @@ $ substreams run -e <ENDPOINT> substreams.<CHAIN>.yaml map_counters -t +200 -o j
 
 ```mermaid
 graph TD;
-  map_block[map: map_block]
-  sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block
-  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block
+  map_block_stats[map: map_block_stats]
+  sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
+  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block_stats
   store_traces_count[store: store_traces_count]
-  map_block --> store_traces_count
+  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> store_traces_count
+  map_block_stats --> store_traces_count
   store_action_count[store: store_action_count]
-  map_block --> store_action_count
+  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> store_action_count
+  map_block_stats --> store_action_count
   map_counters[map: map_counters]
+  sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> map_counters
   store_action_count -- deltas --> map_counters
   store_traces_count -- deltas --> map_counters
   kv_out[map: kv_out]
@@ -55,96 +58,49 @@ graph TD;
   map_counters --> db_out
 ```
 
-### Modules (Ethereum)
+### Modules
 
 ```yaml
-Package name: subtivity_eth
+Package name: subtivity_ethereum
 Version: v0.1.0
-Doc: Subtivity for ETH.
+Doc: Subtivity for Ethereum
 Modules:
 ----
-Name: map_block
+Name: map_block_stats
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.BlockStats
-Hash: 231b13163f6dc43e8f0bed2a2436a610fab384b6
+Hash: 74fd20f32abf15efed4d319aac71d1d8f8644928
 
 Name: store_traces_count
 Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: 6c136fc6b2a55e187ad1fed8695dee6e35475e50
+Hash: f5725b6f5a268d1466a7085e5092f727f7e8ed17
 
 Name: store_action_count
 Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: 3109137c34821a89bd6f070d7c8474858d220620
+Hash: 5a887f6317ded06f9997e337dd65b0e1c783c48b
 
 Name: map_counters
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.Counters
-Hash: fd5c3dc3fb3ce80ec0fd340ac42d4b4338d06c8f
+Hash: 3b08ede52ae6461dba828a0258331e6dc1eafea9
 
 Name: kv_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.kv.v1.KVOperations
-Hash: a8aadc8d9f63ba70e4a1ac32f2e0daa350c0b7b2
+Hash: 5574a0d7bfc078c23a9ec06a55d17693bad6d436
 
 Name: db_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.database.v1.DatabaseChanges
-Hash: 742340677bc70b2ff3f35941179bd8a6670a443a
-```
-
-## Modules (Antelope)
-
-```yaml
-Package name: subtivity_antelope
-Version: v0.1.0
-Doc: Subtivity for Antelope.
-Modules:
-----
-Name: map_block
-Initial block: 0
-Kind: map
-Output Type: proto:subtivity.v1.BlockStats
-Hash: d8df97e41aea26acde6b5e891f4ba75cba71fada
-
-Name: store_traces_count
-Initial block: 0
-Kind: store
-Value Type: int64
-Update Policy: UPDATE_POLICY_ADD
-Hash: 091025bc7cd9520446c0ec8fdde77fc901caada7
-
-Name: store_action_count
-Initial block: 0
-Kind: store
-Value Type: int64
-Update Policy: UPDATE_POLICY_ADD
-Hash: 7a6cb443e7104b17480ad5863cfc7b1258b67a3a
-
-Name: map_counters
-Initial block: 0
-Kind: map
-Output Type: proto:subtivity.v1.Counters
-Hash: c36cb2c656892811a8ca6dee9b72ac7b1d0c693a
-
-Name: kv_out
-Initial block: 0
-Kind: map
-Output Type: proto:sf.substreams.sink.kv.v1.KVOperations
-Hash: fc9620ae59b4b39e7a96c402b5e8edbf76b722ef
-
-Name: db_out
-Initial block: 0
-Kind: map
-Output Type: proto:sf.substreams.sink.database.v1.DatabaseChanges
-Hash: 21334628620e30f967d24d759d1fd581704c3c14
+Hash: 67e013577908e933b9989ebb66915f061966f47a
 ```

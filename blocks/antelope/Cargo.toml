@@ -1,7 +1,7 @@
 [package]
-name = "subtivity_block_antelope"
+name = "subtivity_block_stats_antelope"
 version = "0.1.0"
-description = "Subtivity Block for Antelope"
+description = "Subtivity Block stats for Antelope"
 edition = "2021"
 
 [lib]

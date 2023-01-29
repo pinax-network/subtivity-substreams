@@ -1,18 +1,18 @@
 specVersion: v0.1.0
 package:
-  name: subtivity_eth
+  name: subtivity_ethereum
   version: v0.1.0
   url: https://github.com/pinax-network/pinax-subtivity
-  doc: Subtivity for ETH.
+  doc: Subtivity for Ethereum
 
 binaries:
   default:
     type: wasm/rust-v1
     file: ./target/wasm32-unknown-unknown/release/subtivity.wasm
 
-  subtivity_block:
+  block_stats:
     type: wasm/rust-v1
-    file: ./target/wasm32-unknown-unknown/release/subtivity_block_eth.wasm
+    file: ./target/wasm32-unknown-unknown/release/subtivity_block_stats_ethereum.wasm
 
 protobuf:
   files:
@@ -23,9 +23,9 @@ protobuf:
     - proto/v1
 
 modules:
-  - name: map_block
+  - name: map_block_stats
     kind: map
-    binary: subtivity_block
+    binary: block_stats
     inputs:
       - source: sf.ethereum.type.v2.Block
     output:
@@ -37,7 +37,7 @@ modules:
     valueType: int64
     inputs:
       - source: sf.substreams.v1.Clock
-      - map: map_block
+      - map: map_block_stats
 
   - name: store_action_count
     kind: store
@@ -45,12 +45,11 @@ modules:
     valueType: int64
     inputs:
       - source: sf.substreams.v1.Clock
-      - map: map_block
+      - map: map_block_stats
 
   - name: map_counters
     kind: map
     inputs:
-      - source: sf.substreams.v1.Clock
       - store: store_action_count
         mode: deltas
       - store: store_traces_count
@@ -75,5 +74,5 @@ modules:
       type: proto:sf.substreams.sink.database.v1.DatabaseChanges
 
 params:
-  db_out: "eth"
-  kv_out: "eth"
+  db_out: "ethereum"
+  kv_out: "ethereum"
