@@ -1,17 +1,17 @@
 // @generated
-#[derive(Clone, PartialEq, Eq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Counters {
     #[prost(message, repeated, tag="1")]
     pub counters: ::prost::alloc::vec::Vec<Counter>,
 }
-#[derive(Clone, PartialEq, Eq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Counter {
     #[prost(string, tag="1")]
     pub key: ::prost::alloc::string::String,
     #[prost(int64, tag="2")]
     pub value: i64,
 }
-#[derive(Clone, PartialEq, Eq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BlockStats {
     /// number of successfully executed transactions in this block
     #[prost(int64, tag="1")]
