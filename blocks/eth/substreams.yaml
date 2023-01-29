@@ -1,14 +1,14 @@
 specVersion: v0.1.0
 package:
-  name: subtivity_block_evm
+  name: subtivity_block_eth
   version: v0.1.0
   url: https://github.com/pinax-network/pinax-subtivity
-  doc: Subtivity Block for EVM
+  doc: Subtivity Block for ETH
 
 binaries:
   default:
     type: wasm/rust-v1
-    file: ../../target/wasm32-unknown-unknown/release/subtivity_block_evm.wasm
+    file: ../../target/wasm32-unknown-unknown/release/subtivity_block_eth.wasm
 
 protobuf:
   files:

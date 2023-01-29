@@ -12,19 +12,21 @@ pub fn map_counters(
     let mut counters = Vec::new();
 
     for delta in store_traces_count.deltas {
+        let key = format!("trace_count:{}", delta.key);
+        let value = delta.new_value;
+
         log::debug!("traces_count delta={:?} clock={:?}", delta, clock);
-        counters.push(Counter {
-            key: format!("trace_count:{}", delta.key),
-            value: delta.new_value,
-        })
+        if value == 0 { continue; }
+        counters.push(Counter { key, value })
     }
 
     for delta in store_action_count.deltas {
+        let key = format!("trace_count:{}", delta.key);
+        let value = delta.new_value;
+
         log::debug!("action_count delta={:?} clock={:?}", delta, clock);
-        counters.push(Counter {
-            key: format!("action_count:{}", delta.key),
-            value: delta.new_value,
-        })
+        if value == 0 { continue; }
+        counters.push(Counter { key, value })
     }
     Ok(Counters { counters })
 }

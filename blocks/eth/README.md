@@ -1,4 +1,4 @@
-# **Subtivity** Block for `EVM`
+# **Subtivity** Block for `ETH`
 
 ### Quickstart
 
@@ -17,14 +17,14 @@ graph TD;
 ### Modules
 
 ```yaml
-Package name: subtivity_block_evm
+Package name: subtivity_block_eth
 Version: v0.1.0
-Doc: Subtivity Block for EVM
+Doc: Subtivity Block for ETH
 Modules:
 ----
 Name: map_block
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.BlockStats
-Hash: caace6a4307b3e38e1bd7a33e5ad519cd31f578d
+Hash: 231b13163f6dc43e8f0bed2a2436a610fab384b6
 ```
