@@ -41,6 +41,7 @@ $ substreams run -e <ENDPOINT> substreams.<CHAIN>.yaml map_counters -t +200 -o j
 graph TD;
   map_block[map: map_block]
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block
+  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block
   store_traces_count[store: store_traces_count]
   sf.substreams.v1.Clock[source: sf.substreams.v1.Clock] --> store_traces_count
   map_block --> store_traces_count
