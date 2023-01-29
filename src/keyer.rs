@@ -4,15 +4,14 @@ pub fn get_rem_euclid(seconds: i64, interval: i64) -> i64 {
     if interval == 0 {
         return 0;
     }
-    return if seconds % interval == 0 {
-        seconds.clone()
-    } else {
-        seconds.clone() - seconds.rem_euclid(interval)
-    };
+    if seconds % interval == 0 {
+        return seconds;
+    }
+    seconds - seconds.rem_euclid(interval)
 }
 
 pub fn get_key(seconds: i64, interval: i64) -> String {
-    format!("{}:{}", interval, get_rem_euclid(seconds, interval).to_string())
+    format!("{}:{}", interval, get_rem_euclid(seconds, interval))
 }
 
 #[test]
