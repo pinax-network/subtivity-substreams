@@ -80,16 +80,7 @@ Output Type: proto:sf.substreams.v1.Clock
 Hash: e34fe4a9a2c2e93984109187b16b86b5a1b9c78f
 ```
 
-### Deploy [`Hasura`](https://hasura.io)
-
-1. Run `docker-compose up`
-2. Check out the [postgres-sink](https://github.com/streamingfast/substreams-sink-postgres#setup) and then run 
-`go install ./cmd/substreams-sink-postgres` from within that directory (requires a proper Go installation, see 
-[here](https://github.com/pinax-network/substreams-antelope-core#go) for instructions)
-3. Run the sink: `substreams-sink-postgres run "psql://app_user:password@127.0.0.1:5432/app_db?sslmode=disable" "eos.firehose.eosnation.io:9001" chains/antelope/substreams.yaml db_out`
-4. Open the Hasura console on `localhost:8080/console` and add the database under "Data" using this url: `postgresql://app_user:password@db:5432/app_db?sslmode=disable` and track the `hourly_stats` table
-
 ### Deploy [`Badger DB`](https://github.com/dgraph-io/badger)
 
 1. [Installing `Badger`](https://github.com/dgraph-io/badger#installing)
-2. Run the sink: `substreams-sink-kv run "badger3://badger_data.db" eos.firehose.eosnation.io:9001 chains/antelope/substreams.yaml kv_out`
+2. Run the sink: `substreams-sink-kv run badger3://badger_data.db mainnet.eth.streamingfast.io:443 substreams.yaml kv_out`

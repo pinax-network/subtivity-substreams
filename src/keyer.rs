@@ -1,9 +1,9 @@
-#![allow(dead_code, unused)]
-
 pub static INTERVAL: i64 = 86400;
 
 pub fn get_rem_euclid(seconds: i64, interval: i64) -> i64 {
-    if interval == 0 { return 0; }
+    if interval == 0 {
+        return 0;
+    }
     return if seconds % interval == 0 {
         seconds.clone()
     } else {
@@ -22,4 +22,3 @@ fn test_get_key() {
     assert_eq!("86400:172800", get_key(172800, 86400));
     assert_eq!("86400:1528502400", get_key(1528502400, 86400));
 }
-

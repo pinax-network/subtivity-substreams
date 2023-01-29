@@ -4,6 +4,6 @@ pub mod subtivity;
 pub use self::subtivity::*;
 
 mod keyer;
-mod stores;
-mod sinks;
 mod maps;
+mod sinks;
+mod stores;
