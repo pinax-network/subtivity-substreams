@@ -31,9 +31,38 @@ $ substreams run -e <ENDPOINT> substreams.<CHAIN>.yaml map_counters -t +200 -o j
 
 ### Deploy [`Badger DB`](https://github.com/dgraph-io/badger)
 
-1. [Installing `Badger`](https://github.com/dgraph-io/badger#installing)
-2. Run the sink: `substreams-sink-kv run badger3://badger_data.db mainnet.eth.streamingfast.io:443 substreams.yaml kv_out`
+> [Installing `Badger`](https://github.com/dgraph-io/badger#installing)
 
+```bash
+$ substreams-sink-kv run badger3://badger_data.db mainnet.eth.streamingfast.io:443 substreams.yaml kv_out
+```
+
+## Key Format
+
+- **Format**: `<chain_id>:<counter>:<interval>:<seconds>`
+- **Example**: `eth:trace_calls:86400:1525132800`
+
+## Value Format (bytes)
+
+Decoding Base64 String
+
+```js
+> Buffer.from("Nzc4MTMz","base64").toString()
+'778133'
+```
+
+## Query Data
+
+```
+$ grpcurl --plaintext -d '{"key":"eth:trace_calls:86400:1525132800"}' localhost:8000 sf.substreams.sink.kv.v1.Kv/Get
+```
+
+| Method        | Request    |
+|---------------|------------|
+| `Get`         | `{"key":"eth:trace_calls:86400:1525132800"}`
+| `GetMany`     | `{"keys":["eth:trace_calls:86400:1525132800","eth:trace_calls:86400:1525046400"]}`
+| `GetByPrefix` | `{"prefix":"eth:trace_calls:86400"}`
+| `Scan`        | `{"limit":1000}`
 
 ### Graph
 
