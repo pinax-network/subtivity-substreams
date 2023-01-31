@@ -1,8 +1,6 @@
 syntax = "proto3";
 
-package sf.substreams.sink.kv.v1;
-
-option go_package = "github.com/streamingfast/substreams-sink-kv/pb;pbkv";
+package sf.substreams.kv.v1;
 
 message KVOperations {
   repeated KVOperation operations = 1;

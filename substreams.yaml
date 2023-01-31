@@ -1,7 +1,7 @@
 specVersion: v0.1.0
 package:
   name: subtivity_ethereum
-  version: v0.1.0
+  version: v0.1.1
   url: https://github.com/pinax-network/pinax-subtivity
   doc: Subtivity for Ethereum
 
@@ -57,14 +57,6 @@ modules:
     output:
       type: proto:subtivity.v1.Counters
 
-  - name: kv_out
-    kind: map
-    inputs:
-      # - params: string
-      - map: map_counters
-    output:
-      type: proto:sf.substreams.sink.kv.v1.KVOperations
-
   - name: db_out
     kind: map
     inputs:
@@ -72,6 +64,14 @@ modules:
       - map: map_counters
     output:
       type: proto:sf.substreams.sink.database.v1.DatabaseChanges
+
+  - name: kv_out
+    kind: map
+    inputs:
+      # - params: string
+      - map: map_counters
+    output:
+      type: proto:sf.substreams.sink.kv.v1.KVOperations
 
 params:
   db_out: "ethereum"
