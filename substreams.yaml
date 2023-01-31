@@ -71,7 +71,7 @@ modules:
       # - params: string
       - map: map_counters
     output:
-      type: proto:sf.substreams.sink.kv.v1.KVOperations
+      type: proto:sf.substreams.kv.v1.KVOperations
 
 params:
   db_out: "ethereum"
