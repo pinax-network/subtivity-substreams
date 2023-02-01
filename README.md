@@ -29,9 +29,9 @@ $ substreams run map_counters -t +200 -o jsonl
 $ substreams run -e <ENDPOINT> substreams.<CHAIN>.yaml map_counters -t +200 -o jsonl
 ```
 
-### Deploy [`Badger DB`](https://github.com/dgraph-io/badger)
+### Deploy KV Sink
 
-> [Installing `Badger`](https://github.com/dgraph-io/badger#installing)
+For testing purposes, [BadgerDB](https://dgraph.io/docs/badger/) is already included in the Substreams KV Sink, no need for any database install requirements.
 
 ```bash
 $ substreams-sink-kv run badger3://badger_data.db \
@@ -39,6 +39,11 @@ $ substreams-sink-kv run badger3://badger_data.db \
   substreams.yaml \
   kv_out
 ```
+
+## Endpoints
+
+- **Prometheus metrics server**: `localhost:9102`
+- **ConnectWeb GRPC server**: `localhost:8000` (expose as reverse proxy using Nginx)
 
 ## Production deployment
 
