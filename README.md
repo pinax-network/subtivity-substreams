@@ -34,8 +34,33 @@ $ substreams run -e <ENDPOINT> substreams.<CHAIN>.yaml map_counters -t +200 -o j
 > [Installing `Badger`](https://github.com/dgraph-io/badger#installing)
 
 ```bash
-$ substreams-sink-kv run badger3://badger_data.db mainnet.eth.streamingfast.io:443 substreams.yaml kv_out
+$ substreams-sink-kv run badger3://badger_data.db \
+  mainnet.eth.streamingfast.io:443 \
+  substreams.yaml \
+  kv_out
 ```
+
+## Production deployment
+
+- replace `subtreams.yaml` => `*.spkg GitHub release URL`
+- replace `badger3://badger_data.db` => `tikv://pd0,pd1,pd2:2379?prefix=namespace_prefix`
+
+[More info here](https://substreams.streamingfast.io/developers-guide/substreams-sinks/substreams-sink-kv#sending-to-a-production-key-value-store)
+
+## Nginx
+
+ConnectWeb server will need to be exposed as a public gRPC endpoint.
+
+```nginx
+server {
+      listen 443 http2;
+      listen [::]:443 http2;
+      location / {
+            grpc_pass grpc://localhost:8000;
+      }
+}
+```
+
 
 ## Key Format
 
