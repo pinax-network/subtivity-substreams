@@ -23,6 +23,26 @@
 $ substreams run map_counters -t +200 -o jsonl
 ```
 
+### Graph
+
+```mermaid
+graph TD;
+  map_block_stats[map: map_block_stats]
+  sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
+  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block_stats
+  store_transaction_traces[store: store_transaction_traces]
+  map_block_stats --> store_transaction_traces
+  store_trace_calls[store: store_trace_calls]
+  map_block_stats --> store_trace_calls
+  map_counters[map: map_counters]
+  store_trace_calls -- deltas --> map_counters
+  store_transaction_traces -- deltas --> map_counters
+  kv_out[map: kv_out]
+  map_counters --> kv_out
+  db_out[map: db_out]
+  map_counters --> db_out
+```
+
 **Running no-ETH chains**
 
 ```
@@ -66,7 +86,6 @@ server {
 }
 ```
 
-
 ## Key Format
 
 - **Format**: `<chain_id>:<counter>:<interval>:<seconds>`
@@ -94,25 +113,6 @@ $ grpcurl --plaintext -d '{"key":"eth:trace_calls:86400:1525132800"}' localhost:
 | `GetByPrefix` | `{"prefix":"eth:trace_calls:86400"}`
 | `Scan`        | `{"limit":1000}`
 
-### Graph
-
-```mermaid
-graph TD;
-  map_block_stats[map: map_block_stats]
-  sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
-  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block_stats
-  store_transaction_traces[store: store_transaction_traces]
-  map_block_stats --> store_transaction_traces
-  store_trace_calls[store: store_trace_calls]
-  map_block_stats --> store_trace_calls
-  map_counters[map: map_counters]
-  store_trace_calls -- deltas --> map_counters
-  store_transaction_traces -- deltas --> map_counters
-  kv_out[map: kv_out]
-  map_counters --> kv_out
-  db_out[map: db_out]
-  map_counters --> db_out
-```
 
 ### Modules
 
