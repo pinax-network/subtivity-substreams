@@ -20,7 +20,7 @@
 ### Quickstart
 
 ```
-$ substreams run map_counters -t +200 -o jsonl
+$ substreams run kv_out -s 50000 -t +3 -o jsonl
 ```
 
 ### Graph
@@ -29,24 +29,19 @@ $ substreams run map_counters -t +200 -o jsonl
 graph TD;
   map_block_stats[map: map_block_stats]
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
-  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block_stats
   store_transaction_traces[store: store_transaction_traces]
   map_block_stats --> store_transaction_traces
   store_trace_calls[store: store_trace_calls]
   map_block_stats --> store_trace_calls
-  map_counters[map: map_counters]
-  store_trace_calls -- deltas --> map_counters
-  store_transaction_traces -- deltas --> map_counters
   kv_out[map: kv_out]
-  map_counters --> kv_out
-  db_out[map: db_out]
-  map_counters --> db_out
+  store_trace_calls -- deltas --> kv_out
+  store_transaction_traces -- deltas --> kv_out
 ```
 
 **Running no-ETH chains**
 
 ```
-$ substreams run -e <ENDPOINT> substreams.<CHAIN>.yaml map_counters -t +200 -o jsonl
+$ substreams run -e <ENDPOINT> substreams.<CHAIN>.yaml kv_out -t +200 -o jsonl
 ```
 
 ### Deploy KV Sink
@@ -88,8 +83,8 @@ server {
 
 ## Key Format
 
-- **Format**: `<chain_id>:<counter>:<interval>:<seconds>`
-- **Example**: `eth:trace_calls:86400:1525132800`
+- **Format**: `<type>:<chain_id>:<interval>:<seconds>`
+- **Example**: `trace_calls:eth:86400:1525132800`
 
 ## Value Format (bytes)
 
@@ -103,22 +98,21 @@ Decoding Base64 String
 ## Query Data
 
 ```
-$ grpcurl --plaintext -d '{"key":"eth:trace_calls:86400:1525132800"}' localhost:8000 sf.substreams.sink.kv.v1.Kv/Get
+$ grpcurl --plaintext -d '{"limit":3}' localhost:8000 sf.substreams.sink.kv.v1.Kv/Scan
 ```
 
 | Method        | Request    |
 |---------------|------------|
-| `Get`         | `{"key":"eth:trace_calls:86400:1525132800"}`
-| `GetMany`     | `{"keys":["eth:trace_calls:86400:1525132800","eth:trace_calls:86400:1525046400"]}`
-| `GetByPrefix` | `{"prefix":"eth:trace_calls:86400"}`
+| `Get`         | `{"key":"trace_calls:eth:86400:1525132800"}`
+| `GetMany`     | `{"keys":["trace_calls:eth:86400:1525132800","trace_calls:eth:86400:1525046400"]}`
+| `GetByPrefix` | `{"prefix":"trace_calls:eth:86400"}`
 | `Scan`        | `{"limit":1000}`
-
 
 ### Modules
 
 ```yaml
 Package name: subtivity_ethereum
-Version: v0.1.0
+Version: v0.1.2
 Doc: Subtivity for Ethereum
 Modules:
 ----
@@ -133,30 +127,18 @@ Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: a29093257ea8bc6c5b9f0c2b2489fc099d483c3f
+Hash: a1bc0f77d0b941bba7b4a051665f8b8a0e26cc19
 
 Name: store_trace_calls
 Initial block: 0
 Kind: store
 Value Type: int64
 Update Policy: UPDATE_POLICY_ADD
-Hash: 9e599d84a1fabc850cd8535362ebe760d7a3f1f3
-
-Name: map_counters
-Initial block: 0
-Kind: map
-Output Type: proto:subtivity.v1.Counters
-Hash: 920c66d65a49abae7212105ebb336fb2ef9e6b3c
+Hash: 26458e33cb32669e6d700798016bb257bcad2416
 
 Name: kv_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.kv.v1.KVOperations
-Hash: 5ea5cc13a518199eb95e49e4a100f653a4cf0ed6
-
-Name: db_out
-Initial block: 0
-Kind: map
-Output Type: proto:sf.substreams.sink.database.v1.DatabaseChanges
-Hash: 41725425562deb9b1cc1f6de56c6d9320dfc5400
+Hash: 0940ef858d68a7fd15c37ff3fd5420f196af0d2c
 ```

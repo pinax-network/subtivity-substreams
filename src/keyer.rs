@@ -14,6 +14,14 @@ pub fn get_key(seconds: i64, interval: i64) -> String {
     format!("{}:{}", interval, get_rem_euclid(seconds, interval))
 }
 
+pub fn transaction_traces_key(params: &str, key: &str) -> String {
+    format!("transaction_traces:{}:{}", params, key)
+}
+
+pub fn trace_calls_key(params: &str, key: &str) -> String {
+    format!("trace_calls:{}:{}", params, key)
+}
+
 #[test]
 fn test_get_key() {
     assert_eq!("86400:0", get_key(0, 86400));

@@ -1,7 +1,7 @@
 specVersion: v0.1.0
 package:
   name: subtivity_antelope
-  version: v0.1.1
+  version: v0.1.2
   url: https://github.com/pinax-network/pinax-subtivity
   doc: Subtivity for Antelope
 
@@ -18,7 +18,6 @@ protobuf:
   files:
     - subtivity.proto
     - kv.proto
-    - database.proto
   importPaths:
     - proto/v1
 
@@ -47,31 +46,16 @@ modules:
       - source: sf.substreams.v1.Clock
       - map: map_block_stats
 
-  - name: map_counters
+  - name: kv_out
     kind: map
     inputs:
+      # - params: string
       - store: store_trace_calls
         mode: deltas
       - store: store_transaction_traces
         mode: deltas
     output:
-      type: proto:subtivity.v1.Counters
-
-  - name: kv_out
-    kind: map
-    inputs:
-      # - params: string
-      - map: map_counters
-    output:
-      type: proto:sf.substreams.sink.kv.v1.KVOperations
-
-  - name: db_out
-    kind: map
-    inputs:
-      # - params: string
-      - map: map_counters
-    output:
-      type: proto:sf.substreams.sink.database.v1.DatabaseChanges
+      type: proto:sf.substreams.kv.v1.KVOperations
 
 params:
   db_out: "antelope"
