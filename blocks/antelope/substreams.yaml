@@ -20,7 +20,7 @@ modules:
   - name: map_block_stats
     kind: map
     inputs:
-      - source: sf.antelope.type.v2.Block
+      - source: sf.antelope.type.v1.Block
     output:
       type: proto:subtivity.v1.BlockStats
 

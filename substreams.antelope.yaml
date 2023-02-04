@@ -26,7 +26,7 @@ modules:
     kind: map
     binary: block_stats
     inputs:
-      - source: sf.antelope.type.v2.Block
+      - source: sf.antelope.type.v1.Block
     output:
       type: proto:subtivity.v1.BlockStats
 

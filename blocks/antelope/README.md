@@ -11,7 +11,7 @@ $ substreams run -e eos.firehose.eosnation.io:9001 map_block_stats -s 290000000 
 ```mermaid
 graph TD;
   map_block_stats[map: map_block_stats]
-  sf.antelope.type.v2.Block[source: sf.antelope.type.v2.Block] --> map_block_stats
+  sf.antelope.type.v1.Block[source: sf.antelope.type.v1.Block] --> map_block_stats
 ```
 
 ### Modules
