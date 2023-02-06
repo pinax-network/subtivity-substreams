@@ -29,6 +29,7 @@ $ substreams run kv_out -s 50000 -t +3 -o jsonl
 graph TD;
   map_block_stats[map: map_block_stats]
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
+  sf.antelope.type.v1.Block[source: sf.antelope.type.v1.Block] --> map_block_stats
   store_transaction_traces[store: store_transaction_traces]
   map_block_stats --> store_transaction_traces
   store_trace_calls[store: store_trace_calls]
