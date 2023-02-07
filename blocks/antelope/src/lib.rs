@@ -4,7 +4,7 @@ pub mod pb;
 
 use pb::BlockStats;
 use substreams::errors::Error;
-use substreams_antelope::pb::antelope::Block;
+use substreams_antelope::Block;
 
 #[substreams::handlers::map]
 pub fn map_block_stats(block: Block) -> Result<BlockStats, Error> {
