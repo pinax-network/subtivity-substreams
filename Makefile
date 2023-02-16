@@ -21,6 +21,7 @@ pack:
 .PHONY: graph
 graph:
 	substreams graph
+	substreams graph substreams.antelope.yaml
 
 .PHONY: info
 info:
