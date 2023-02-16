@@ -41,4 +41,8 @@ gui:
 
 .PHONY: sink
 sink:
-	substreams-sink-prometheus run
+	substreams-sink-prometheus run https://github.com/pinax-network/subtivity-substreams/releases/download/v0.2.0/subtivity-ethereum-v0.2.0.spkg -s 16640000
+
+.PHONY: sink_antelope
+sink_antelope:
+	substreams-sink-prometheus run -e eos.firehose.eosnation.io:9001 https://github.com/pinax-network/subtivity-substreams/releases/download/v0.2.0/subtivity-antelope-v0.2.0.spkg -s 294810000 -p 9103

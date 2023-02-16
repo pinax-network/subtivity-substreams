@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'subtivity-eth'
+    static_configs:
+      - targets: ['localhost:9102']
+
+  - job_name: 'subtivity-antelope'
+    static_configs:
+      - targets: ['localhost:9103']
