@@ -2,8 +2,10 @@
 
 ### Quickstart
 
-```
-$ substreams run -e eos.firehose.eosnation.io:9001 map_block_stats -s 290000000 -t +10
+```bash
+$ make
+$ make run
+$ make gui
 ```
 
 ### Graph

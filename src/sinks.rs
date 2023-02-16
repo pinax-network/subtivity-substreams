@@ -1,26 +1,31 @@
-use substreams::prelude::*;
-use substreams::errors::Error;
-use substreams_sink_kv::pb::kv::KvOperations;
+// use std::collections::HashMap;
 
-use crate::keyer;
+use substreams::errors::Error;
+use substreams_sink_prometheus::{PrometheusOperations, Counter, Histogram, Summary};
+
+use crate::pb::BlockStats;
 
 #[substreams::handlers::map]
-pub fn kv_out(params: String, store_transaction_traces: Deltas<DeltaInt64>, store_trace_calls: Deltas<DeltaInt64>) -> Result<KvOperations, Error> {
-    let mut kv_ops: KvOperations = Default::default();
-    let chain_id = params.as_str();
+pub fn prom_out(stats: BlockStats) -> Result<PrometheusOperations, Error> {
+    let mut prom_out = PrometheusOperations::default();
 
-    for delta in store_transaction_traces.deltas {
-        let value = delta.new_value;
-        if value > 0 {
-            kv_ops.push_new(keyer::transaction_traces_key(chain_id, &delta.key), value.to_string(), 1);
-        }
+    if stats.trace_calls > 0 {
+        let mut counter = Counter::from("trace_calls");
+        let mut histogram = Histogram::from("trace_calls_histogram");
+        let mut summary = Summary::from("trace_calls_histogram");
+        prom_out.push(counter.add(stats.trace_calls as f64));
+        prom_out.push(histogram.observe(stats.trace_calls as f64));
+        prom_out.push(summary.observe(stats.trace_calls as f64));
     }
 
-    for delta in store_trace_calls.deltas {
-        let value = delta.new_value;
-        if value > 0 {
-            kv_ops.push_new(keyer::trace_calls_key(chain_id, &delta.key), value.to_string(), 1);
-        }
+    if stats.transaction_traces > 0 {
+        let mut counter = Counter::from("transaction_traces");
+        let mut histogram = Histogram::from("transaction_traces_histogram");
+        let mut summary = Summary::from("transaction_traces_histogram");
+        prom_out.push(counter.add(stats.transaction_traces as f64));
+        prom_out.push(histogram.observe(stats.transaction_traces as f64));
+        prom_out.push(summary.observe(stats.transaction_traces as f64));
     }
-    Ok(kv_ops)
+
+    Ok(prom_out)
 }

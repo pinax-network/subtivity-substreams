@@ -1,8 +1,6 @@
 #[path = "pb/subtivity.v1.rs"]
 #[allow(dead_code)]
-pub mod subtivity;
-pub use self::subtivity::*;
+pub mod pb;
+pub use self::pb::*;
 
-mod keyer;
 mod sinks;
-mod stores;

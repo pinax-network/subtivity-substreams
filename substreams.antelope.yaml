@@ -5,6 +5,9 @@ package:
   url: https://github.com/pinax-network/pinax-subtivity
   doc: Subtivity for Antelope
 
+imports:
+  prometheus: https://github.com/pinax-network/substreams-sink-prometheus/releases/download/v0.1.9/substreams-sink-prometheus-v0.1.9.spkg
+
 binaries:
   default:
     type: wasm/rust-v1
@@ -17,7 +20,6 @@ binaries:
 protobuf:
   files:
     - subtivity.proto
-    - kv.proto
   importPaths:
     - proto/v1
 
@@ -30,32 +32,12 @@ modules:
     output:
       type: proto:subtivity.v1.BlockStats
 
-  - name: store_transaction_traces
-    kind: store
-    updatePolicy: add
-    valueType: int64
-    inputs:
-      - source: sf.substreams.v1.Clock
-      - map: map_block_stats
-
-  - name: store_trace_calls
-    kind: store
-    updatePolicy: add
-    valueType: int64
-    inputs:
-      - source: sf.substreams.v1.Clock
-      - map: map_block_stats
-
-  - name: kv_out
+  - name: prom_out
     kind: map
     inputs:
-      - params: string
-      - store: store_trace_calls
-        mode: deltas
-      - store: store_transaction_traces
-        mode: deltas
+      - map: map_block_stats
     output:
-      type: proto:sf.substreams.kv.v1.KVOperations
+      type: proto:pinax.substreams.sink.prometheus.v1.PrometheusOperations
 
-params:
-  kv_out: "antelope"
+# params:
+#   prom_out: "antelope"

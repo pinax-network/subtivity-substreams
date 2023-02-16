@@ -1,8 +1,8 @@
-#[path = "pb/subtivity.v1.rs"]
+#[path = "../../../src/pb/subtivity.v1.rs"]
 #[allow(dead_code)]
 pub mod pb;
+pub use self::pb::*;
 
-use pb::BlockStats;
 use substreams::errors::Error;
 use substreams_antelope::Block;
 

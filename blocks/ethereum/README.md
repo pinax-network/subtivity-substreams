@@ -2,8 +2,10 @@
 
 ### Quickstart
 
-```
-$ substreams run map_block_stats -s 16500000 -t +10
+```bash
+$ make
+$ make run
+$ make gui
 ```
 
 ### Graph
