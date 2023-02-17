@@ -9,3 +9,7 @@ scrape_configs:
   - job_name: 'subtivity-antelope'
     static_configs:
       - targets: ['localhost:9104']
+
+  - job_name: 'subtivity-wax'
+    static_configs:
+      - targets: ['localhost:9105']

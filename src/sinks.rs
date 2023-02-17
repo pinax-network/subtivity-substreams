@@ -1,5 +1,3 @@
-// use std::collections::HashMap;
-
 use substreams::errors::Error;
 use substreams_sink_prometheus::{PrometheusOperations, Counter, Histogram, Summary};
 
