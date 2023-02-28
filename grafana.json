@@ -1,0 +1,852 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 2,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "g22hOA14z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "text",
+              "mode": "fixed"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9104\", job=\"subtivity-antelope\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "EOS"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9103\", job=\"subtivity-eth\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "ETH"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9105\", job=\"subtivity-wax\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "WAX"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 5,
+          "x": 0,
+          "y": 0
+        },
+        "id": 8,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.3.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "builder",
+            "expr": "delta(transaction_traces{job=\"subtivity-antelope\"}[10m]) / 600",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "EOS"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "builder",
+            "expr": "delta(transaction_traces{job=\"subtivity-eth\"}[10m]) / 600",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "ETH"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "code",
+            "expr": "delta(transaction_traces{job=\"subtivity-wax\"}[10m]) / 600",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "WAX"
+          }
+        ],
+        "title": "TPS",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "g22hOA14z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "Traces",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "smooth",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "always",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9104\", job=\"subtivity-antelope\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "EOS"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9103\", job=\"subtivity-eth\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "ETH"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9105\", job=\"subtivity-wax\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "WAX"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 10,
+          "x": 5,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "builder",
+            "expr": "delta(transaction_traces{job=\"subtivity-antelope\"}[$__interval])",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "EOS"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "builder",
+            "expr": "delta(transaction_traces{job=\"subtivity-eth\"}[$__interval])",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "ETH"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "code",
+            "expr": "delta(transaction_traces{job=\"subtivity-wax\"}[$__interval])",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "WAX"
+          }
+        ],
+        "title": "Transaction Traces",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "g22hOA14z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "Traces",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "bars",
+              "fillOpacity": 39,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "smooth",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 3,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "always",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9104\", job=\"subtivity-antelope\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "EOS"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9103\", job=\"subtivity-eth\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "ETH"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9105\", job=\"subtivity-wax\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "WAX"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 9,
+          "x": 15,
+          "y": 0
+        },
+        "id": 5,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "builder",
+            "expr": "delta(trace_calls{job=\"subtivity-antelope\"}[$__interval])",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "EOS"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "builder",
+            "expr": "delta(trace_calls{job=\"subtivity-eth\"}[$__interval])",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "ETH"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "builder",
+            "expr": "delta(trace_calls{job=\"subtivity-wax\"}[$__interval])",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "WAX"
+          }
+        ],
+        "title": "Trace Calls",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "g22hOA14z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "text",
+              "mode": "fixed"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{__name__=\"head_block_drift\", instance=\"localhost:9104\", job=\"subtivity-antelope\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "EOS"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{__name__=\"head_block_drift\", instance=\"localhost:9103\", job=\"subtivity-eth\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "ETH"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{__name__=\"head_block_drift\", instance=\"localhost:9105\", job=\"subtivity-wax\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "WAX"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 7,
+          "x": 0,
+          "y": 8
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "builder",
+            "expr": "head_block_drift{job=\"subtivity-antelope\"}",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "EOS"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "builder",
+            "expr": "head_block_drift{job=\"subtivity-eth\"}",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "ETH"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "code",
+            "expr": "head_block_drift{job=\"subtivity-wax\"}",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "WAX"
+          }
+        ],
+        "title": "Drift Time",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "g22hOA14z"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "text",
+              "mode": "fixed"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{__name__=\"last_block_number\", instance=\"localhost:9104\", job=\"subtivity-antelope\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "EOS"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{__name__=\"last_block_number\", instance=\"localhost:9103\", job=\"subtivity-eth\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "ETH"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{__name__=\"last_block_number\", instance=\"localhost:9105\", job=\"subtivity-wax\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "WAX"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 9,
+          "x": 7,
+          "y": 8
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.3.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "code",
+            "expr": "last_block_number{job=\"subtivity-antelope\"}",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "EOS"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "code",
+            "expr": "last_block_number{job=\"subtivity-eth\"}",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "ETH"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "code",
+            "expr": "last_block_number{job=\"subtivity-wax\"}",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "WAX"
+          }
+        ],
+        "title": "Block Number",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "g22hOA14z"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "text",
+              "mode": "fixed"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dateTimeAsIsoNoDateIfToday"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9104\", job=\"subtivity-antelope\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "EOS"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9103\", job=\"subtivity-eth\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "ETH"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{instance=\"localhost:9105\", job=\"subtivity-wax\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "WAX"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 8,
+          "x": 16,
+          "y": 8
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.3.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "code",
+            "expr": "last_block_timestamp{job=\"subtivity-antelope\"} * 1000",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "EOS"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "code",
+            "expr": "last_block_timestamp{job=\"subtivity-eth\"} * 1000",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "ETH"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "g22hOA14z"
+            },
+            "editorMode": "code",
+            "expr": "last_block_timestamp{job=\"subtivity-wax\"} * 1000",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "WAX"
+          }
+        ],
+        "title": "Block Timestamp",
+        "type": "stat"
+      }
+    ],
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-5m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Subtivity",
+    "uid": "q3opnJJVz",
+    "version": 4,
+    "weekStart": ""
+  }

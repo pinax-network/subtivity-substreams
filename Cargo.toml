@@ -16,7 +16,7 @@ crate-type = ["cdylib"]
 prost = "0.11"
 prost-types = "0.11"
 substreams = "0.5"
-substreams-sink-prometheus = "0.1.9"
+substreams-sink-prometheus = "0.1"
 
 [workspace]
 members = [
