@@ -8,6 +8,8 @@ all:
 .PHONY: build
 build:
 	cargo build --target wasm32-unknown-unknown --release
+	cd blocks/antelope; $(MAKE) --no-print-directory build
+	cd blocks/ethereum; $(MAKE) --no-print-directory build
 
 .PHONY: protogen
 protogen:
