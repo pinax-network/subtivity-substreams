@@ -31,7 +31,7 @@ info:
 
 .PHONY: run
 run:
-	substreams run -e api-unstable.streamingfast.io:443 prom_out -s 50000 -t +100000 -o jsonl
+	substreams run -e mainnet.eth.streamingfast.io:443 prom_out -s 50000 -t +100000 -o jsonl
 
 .PHONY: run_antelope
 run_antelope:
@@ -39,7 +39,7 @@ run_antelope:
 
 .PHONY: gui
 gui:
-	substreams gui -e api-unstable.streamingfast.io:443 prom_out -s 50000 -t +100000
+	substreams gui -e mainnet.eth.streamingfast.io:443 prom_out -s 50000 -t +100000
 
 .PHONY: sink_eth
 sink_eth:
