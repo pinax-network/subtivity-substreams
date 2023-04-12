@@ -33,22 +33,6 @@ info:
 run:
 	substreams run -e mainnet.eth.streamingfast.io:443 prom_out -s 50000 -t +100000 -o jsonl
 
-.PHONY: run_antelope
-run_antelope:
-	substreams run -e eos.firehose.eosnation.io:9001 substreams.antelope.yaml prom_out -s 50000 -t +100000 -o jsonl
-
 .PHONY: gui
 gui:
 	substreams gui -e mainnet.eth.streamingfast.io:443 prom_out -s 50000 -t +100000
-
-.PHONY: sink_eth
-sink_eth:
-	substreams-sink-prometheus run -e mainnet.eth.streamingfast.io:443 https://github.com/pinax-network/subtivity-substreams/releases/download/v0.2.0/subtivity-ethereum-v0.2.0.spkg -s 16640000 -p 9103
-
-.PHONY: sink_eos
-sink_eos:
-	substreams-sink-prometheus run -e eos.firehose.eosnation.io:9001 https://github.com/pinax-network/subtivity-substreams/releases/download/v0.2.0/subtivity-antelope-v0.2.0.spkg -s 294810000 -p 9104
-
-.PHONY: sink_wax
-sink_wax:
-	substreams-sink-prometheus run -e wax.firehose.eosnation.io:9001 https://github.com/pinax-network/subtivity-substreams/releases/download/v0.2.0/subtivity-antelope-v0.2.0.spkg -s 230260000 -p 9105
