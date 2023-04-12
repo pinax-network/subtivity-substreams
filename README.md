@@ -40,7 +40,7 @@ graph TD;
 
 ```yaml
 Package name: subtivity_ethereum
-Version: v0.2.0
+Version: v0.2.1
 Doc: Subtivity for Ethereum
 Modules:
 ----
@@ -48,11 +48,11 @@ Name: map_block_stats
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.BlockStats
-Hash: 21ab7b9408f87679a5b0ed8a49813eada5cab9fc
+Hash: aa5dd16dc1185ca3628dd16ff2ebcad68f08688f
 
 Name: prom_out
 Initial block: 0
 Kind: map
 Output Type: proto:pinax.substreams.sink.prometheus.v1.PrometheusOperations
-Hash: b7fd64d243025b752759e3ca591d8ae580051a36
+Hash: 0003de38e0c5b97cb4fd6f45a5aa784a23275916
 ```
