@@ -35,4 +35,4 @@ run:
 
 .PHONY: gui
 gui:
-	substreams gui -e mainnet.eth.streamingfast.io:443 prom_out -s 50000 -t +100000
+	substreams gui -e mainnet.eth.streamingfast.io:443 kv_out -s 50000 -t +100000

@@ -1,5 +1,6 @@
-use substreams::errors::Error;
+use substreams::{errors::Error, pb::substreams::Clock, log};
 use substreams_sink_prometheus::{PrometheusOperations, Counter};
+use substreams_sink_kv::pb::sf::substreams::sink::kv::v1::KvOperations;
 
 use crate::pb::BlockStats;
 
@@ -16,4 +17,14 @@ pub fn prom_out(stats: BlockStats) -> Result<PrometheusOperations, Error> {
     }
 
     Ok(prom_out)
+}
+
+#[substreams::handlers::map]
+pub fn kv_out(stats: BlockStats, clock: Clock) -> Result<KvOperations, Error> {
+    let mut kv_out = KvOperations::default();
+    let seconds = clock.clone().timestamp.unwrap().seconds;
+    let epoch = (seconds / 86400) * 86400;
+    log::debug!("kv_out: {:?} {:?} {:?}", stats, clock, epoch);
+    kv_out.push_new("hello", "world", 1);
+    Ok(kv_out)
 }
