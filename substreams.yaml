@@ -7,6 +7,7 @@ package:
 
 imports:
   prometheus: https://github.com/pinax-network/substreams-sink-prometheus.rs/releases/download/v0.1.9/substreams-sink-prometheus-v0.1.9.spkg
+  kv: https://github.com/streamingfast/substreams-sink-kv/releases/download/v0.1.2/substreams-sink-kv-v0.1.2.spkg
 
 binaries:
   default:
@@ -38,6 +39,14 @@ modules:
       - map: map_block_stats
     output:
       type: proto:pinax.substreams.sink.prometheus.v1.PrometheusOperations
+
+  - name: kv_out
+    kind: map
+    inputs:
+      - map: map_block_stats
+      - source: sf.substreams.v1.Clock
+    output:
+      type: proto:sf.substreams.sink.kv.v1.KVOperations
 
 # params:
 #   prom_out: "eth"
