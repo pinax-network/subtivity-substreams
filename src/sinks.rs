@@ -35,3 +35,13 @@ pub fn prom_out(stats: BlockStats) -> Result<PrometheusOperations, Error> {
 
     Ok(prom_out)
 }
+
+#[substreams::handlers::map]
+pub fn kv_out(stats: BlockStats, clock: Clock) -> Result<KvOperations, Error> {
+    let mut kv_out = KvOperations::default();
+    let seconds = clock.clone().timestamp.unwrap().seconds;
+    let epoch = (seconds / 86400) * 86400;
+    log::debug!("kv_out: {:?} {:?} {:?}", stats, clock, epoch);
+    kv_out.push_new("hello", "world", 1);
+    Ok(kv_out)
+}
