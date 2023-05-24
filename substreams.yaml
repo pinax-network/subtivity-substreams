@@ -50,3 +50,8 @@ modules:
 
 # params:
 #   prom_out: "eth"
+
+sink:
+  module: kv_out
+  type: sf.substreams.sink.kv.v1.GenericService
+  config:
