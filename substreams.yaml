@@ -28,6 +28,7 @@ modules:
   - name: map_block_stats
     kind: map
     binary: block_stats
+    initialBlock: 0
     inputs:
       - source: sf.ethereum.type.v2.Block
     output:

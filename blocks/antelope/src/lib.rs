@@ -24,6 +24,6 @@ pub fn map_block_stats(block: Block) -> Result<BlockStats, Error> {
     Ok(BlockStats {
         transaction_traces: block.transaction_traces_count() as i64,
         trace_calls: block.executed_total_action_count() as i64,
-        uaw: uaw.into_iter().collect(), 
+        uaw: uaw.into_iter().collect(),
     })
 }

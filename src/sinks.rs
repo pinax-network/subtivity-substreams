@@ -33,6 +33,6 @@ pub fn kv_out(stats: BlockStats, clock: Clock) -> Result<KvOperations, Error> {
     for wallet in stats.uaw.iter() {
         let key = format!("daw:{}:{}", day, wallet);
         kv_out.push_new(key, &[value], 1);
-    }    
+    }
     Ok(kv_out)
 }
