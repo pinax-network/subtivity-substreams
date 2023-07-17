@@ -8,14 +8,21 @@
 
 - [x] Transaction Count
 - [x] Action Count (Events)
-- [ ] UAW (Unique Active Wallets)
+- [x] UAW (Unique Active Wallets)
 
 ## Chains
-
 - [x] Ethereum
+  - [x] Polygon
+  - [x] Binance Smart Chain
+  - [x] Goerli
+  - [x] Sepolia
+  - [x] Rinkeby
+  - [x] Mumbai
 - [x] Antelope
-- [ ] Polygon
-- [ ] Binance Smart Chain
+  - [x] EOS
+  - [x] WAX
+  - [x] Telos
+- [ ] Near
 
 ### Quickstart
 
