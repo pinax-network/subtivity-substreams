@@ -10,6 +10,7 @@ build:
 	cargo build --target wasm32-unknown-unknown --release
 	cd blocks/antelope; $(MAKE) --no-print-directory build
 	cd blocks/ethereum; $(MAKE) --no-print-directory build
+	cd blocks/near; $(MAKE) --no-print-directory build
 
 .PHONY: protogen
 protogen:
@@ -19,11 +20,13 @@ protogen:
 pack:
 	substreams pack
 	substreams pack substreams.antelope.yaml
+	substreams pack substreams.near.yaml
 
 .PHONY: graph
 graph:
 	substreams graph
 	substreams graph substreams.antelope.yaml
+	substreams graph substreams.near.yaml
 
 .PHONY: info
 info:
@@ -31,7 +34,7 @@ info:
 
 .PHONY: run
 run:
-	substreams run -e mainnet.eth.streamingfast.io:443 prom_out -s 50000 -t +100000 -o jsonl
+	substreams run -e mainnet.eth.streamingfast.io:443 substreams.near.yaml prom_out -s 50000 -t +100000 -o jsonl
 
 .PHONY: gui
 gui:
