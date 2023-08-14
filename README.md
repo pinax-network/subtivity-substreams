@@ -22,7 +22,7 @@
   - [x] EOS
   - [x] WAX
   - [x] Telos
-- [ ] Near
+- [x] Near
 
 ### Quickstart
 

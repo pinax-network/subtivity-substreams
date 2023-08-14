@@ -1,7 +1,8 @@
 #[path = "../../../src/pb/subtivity.v1.rs"]
 #[allow(dead_code)]
 pub mod pb;
-pub use pb::*;
+pub use self::pb::BlockStats;
+
 use std::collections::HashSet;
 
 use substreams::errors::Error;
