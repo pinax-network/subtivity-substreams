@@ -11,6 +11,7 @@ build:
 	cd blocks/antelope; $(MAKE) --no-print-directory build
 	cd blocks/ethereum; $(MAKE) --no-print-directory build
 	cd blocks/near; $(MAKE) --no-print-directory build
+	cd blocks/starknet; $(MAKE) --no-print-directory build
 
 .PHONY: protogen
 protogen:
@@ -21,12 +22,14 @@ pack:
 	substreams pack
 	substreams pack substreams.antelope.yaml
 	substreams pack substreams.near.yaml
+	substreams pack substreams.starknet.yaml
 
 .PHONY: graph
 graph:
 	substreams graph
 	substreams graph substreams.antelope.yaml
 	substreams graph substreams.near.yaml
+	substreams graph substreams.starknet.yaml
 
 .PHONY: info
 info:
@@ -34,8 +37,8 @@ info:
 
 .PHONY: run
 run:
-	substreams run -e mainnet.eth.streamingfast.io:443 substreams.near.yaml prom_out -s 50000 -t +100000 -o jsonl
+	substreams run -e eth.substreams.pinax.network:9000 prom_out -s -100 -o jsonl
 
 .PHONY: gui
 gui:
-	substreams gui -e mainnet.eth.streamingfast.io:443 kv_out -s 50000 -t +100000
+	substreams gui -e eth.substreams.pinax.network:9000 prom_out -s -100

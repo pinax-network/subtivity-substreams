@@ -23,6 +23,8 @@
   - [x] WAX
   - [x] Telos
 - [x] Near
+- [x] Starknet
+- [ ] Aptos
 
 ### Quickstart
 
@@ -39,6 +41,8 @@ graph TD;
   map_block_stats[map: map_block_stats]
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
   sf.antelope.type.v1.Block[source: sf.antelope.type.v1.Block] --> map_block_stats
+  sf.near.type.v1.Block[source: sf.near.type.v1.Block] --> map_block_stats
+  zklend.starknet.type.v1.Block[source: zklend.starknet.type.v1.Block] --> map_block_stats
   prom_out[map: prom_out]
   map_block_stats --> prom_out
 ```
@@ -47,7 +51,7 @@ graph TD;
 
 ```yaml
 Package name: subtivity_ethereum
-Version: v0.2.1
+Version: v0.3.0
 Doc: Subtivity for Ethereum
 Modules:
 ----
@@ -55,11 +59,11 @@ Name: map_block_stats
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.BlockStats
-Hash: aa5dd16dc1185ca3628dd16ff2ebcad68f08688f
+Hash: 93725ab06a11557d2f157350311fb73d3ac7437e
 
 Name: prom_out
 Initial block: 0
 Kind: map
 Output Type: proto:pinax.substreams.sink.prometheus.v1.PrometheusOperations
-Hash: 0003de38e0c5b97cb4fd6f45a5aa784a23275916
+Hash: bacc956d16847b90aa41529c88fe4ed93ec91d33
 ```
