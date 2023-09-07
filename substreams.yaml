@@ -38,6 +38,7 @@ modules:
     kind: map
     inputs:
       - map: map_block_stats
+      - source: sf.substreams.v1.Clock
     output:
       type: proto:pinax.substreams.sink.prometheus.v1.PrometheusOperations
 
