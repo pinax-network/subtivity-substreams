@@ -49,6 +49,14 @@ modules:
     output:
       type: proto:sf.substreams.sink.kv.v1.KVOperations
 
+  - name: store_daw
+    kind: store
+    updatePolicy: set
+    initialBlock: 1
+    valueType: int64
+    inputs:
+      - map: map_block_stats
+
 # params:
 #   prom_out: "eth"
 
