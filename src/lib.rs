@@ -4,4 +4,4 @@ pub mod pb;
 pub use self::pb::*;
 
 mod sinks;
-mod store;
+

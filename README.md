@@ -11,6 +11,7 @@
 - [x] UAW (Unique Active Wallets)
 
 ## Chains
+
 - [x] Ethereum
   - [x] Polygon
   - [x] Binance Smart Chain
@@ -61,9 +62,9 @@ Kind: map
 Output Type: proto:subtivity.v1.BlockStats
 Hash: 93725ab06a11557d2f157350311fb73d3ac7437e
 
-Name: prom_out
+Name: graph_out
 Initial block: 0
 Kind: map
-Output Type: proto:pinax.substreams.sink.prometheus.v1.PrometheusOperations
-Hash: bacc956d16847b90aa41529c88fe4ed93ec91d33
+Output Type: proto:sf.substreams.sink.entity.v1.EntityChanges
+Hash: 1f82803e2e060d89fdcbc410c078cb619b2604fd
 ```
