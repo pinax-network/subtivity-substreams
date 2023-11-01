@@ -37,8 +37,8 @@ info:
 
 .PHONY: run
 run:
-	substreams run -e eth.substreams.pinax.network:9000 prom_out -s -100 -o jsonl
+	substreams run -e eth.substreams.pinax.network:9000 graph_out -s -100 -o jsonl
 
 .PHONY: gui
 gui:
-	substreams gui -e eth.substreams.pinax.network:9000 prom_out -s -100
+	substreams gui -e eth.substreams.pinax.network:9000 graph_out -s -100

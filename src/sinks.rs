@@ -1,19 +1,24 @@
 use substreams::errors::Error;
-use substreams_sink_prometheus::{Counter, PrometheusOperations};
-
+use substreams_entity_change::tables::Tables;
+use substreams_entity_change::pb::entity::EntityChanges;
 use crate::pb::BlockStats;
 
 #[substreams::handlers::map]
-pub fn prom_out(stats: BlockStats) -> Result<PrometheusOperations, Error> {
-    let mut prom_out = PrometheusOperations::default();
-
+pub fn graph_out(stats: BlockStats) -> Result<EntityChanges, Error> {
+    let mut tables = Tables::new();
+    let mut key = "".to_string();
+    for wallet in stats.uaw.iter() {
+        key = format!("daw:{}", wallet);
+    }
+    let row =  tables
+    .create_row("BlockStats", key);
     if stats.trace_calls > 0 {
-        prom_out.push(Counter::from("trace_calls").add(stats.trace_calls as f64));
+        row.set("trace_calls", stats.trace_calls);
     }
 
     if stats.transaction_traces > 0 {
-        prom_out.push(Counter::from("transaction_traces").add(stats.transaction_traces as f64));
+        row.set("transaction_traces", stats.transaction_traces);
     }
 
-    Ok(prom_out)
+    Ok(tables.to_entity_changes())
 }

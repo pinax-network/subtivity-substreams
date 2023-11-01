@@ -1,14 +1,12 @@
 specVersion: v0.1.0
 package:
   name: subtivity_antelope
-  version: v0.3.0
+  version: v0.3.1
   url: https://github.com/pinax-network/pinax-subtivity
   doc: Subtivity for Antelope
 
 imports:
-  prometheus: https://github.com/pinax-network/substreams-sink-prometheus.rs/releases/download/v0.1.9/substreams-sink-prometheus-v0.1.9.spkg
-  kv: https://github.com/streamingfast/substreams-sink-kv/releases/download/v0.1.2/substreams-sink-kv-v0.1.2.spkg
-
+  entities: https://github.com/streamingfast/substreams-sink-entity-changes/releases/download/v1.3.0/substreams-sink-entity-changes-v1.3.0.spkg
 binaries:
   default:
     type: wasm/rust-v1
@@ -33,25 +31,9 @@ modules:
     output:
       type: proto:subtivity.v1.BlockStats
 
-  - name: prom_out
+  - name: graph_out
     kind: map
     inputs:
       - map: map_block_stats
     output:
-      type: proto:pinax.substreams.sink.prometheus.v1.PrometheusOperations
-
-  - name: kv_out
-    kind: map
-    inputs:
-      - map: map_block_stats
-      - source: sf.substreams.v1.Clock
-    output:
-      type: proto:sf.substreams.sink.kv.v1.KVOperations
-
-# params:
-#   prom_out: "antelope"
-
-sink:
-  module: kv_out
-  type: sf.substreams.sink.kv.v1.GenericService
-  config:
+      type: proto:sf.substreams.sink.entity.v1.EntityChanges
