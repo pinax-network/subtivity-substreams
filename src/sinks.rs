@@ -15,9 +15,15 @@ pub fn graph_out(stats: BlockStats) -> Result<EntityChanges, Error> {
     if stats.trace_calls > 0 {
         row.set("trace_calls", stats.trace_calls);
     }
+    else{
+        row.set("trace_calls", 0);
+    }
 
     if stats.transaction_traces > 0 {
         row.set("transaction_traces", stats.transaction_traces);
+    }
+    else{
+        row.set("transaction_traces", 0);
     }
 
     Ok(tables.to_entity_changes())
