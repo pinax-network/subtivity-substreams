@@ -1,7 +1,7 @@
 specVersion: v0.1.0
 package:
   name: subtivity_near
-  version: v0.4.0
+  version: v0.4.1
   url: https://github.com/pinax-network/pinax-subtivity
   doc: Subtivity for Near
 
@@ -34,6 +34,7 @@ modules:
   - name: graph_out
     kind: map
     inputs:
+      - source: sf.substreams.v1.Clock
       - map: map_block_stats
     output:
       type: proto:sf.substreams.sink.entity.v1.EntityChanges
