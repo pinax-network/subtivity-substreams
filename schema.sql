@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS BlockStats  (
     trace_calls  Int64,
     uaw  Array(String)
 )
-ENGINE = ReplacingMergeTree()
+ENGINE = MergeTree()
 ORDER BY (timestamp, block_number, chain)
