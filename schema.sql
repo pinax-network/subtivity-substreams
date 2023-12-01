@@ -4,4 +4,4 @@ CREATE TABLE IF NOT EXISTS BlockStats  (
     uaw  Array(String)
 )
 ENGINE = ReplacingMergeTree()
-ORDER BY (block_id)
+ORDER BY (timestamp, block_number, chain)
