@@ -9,6 +9,7 @@
 - [x] Transaction Count
 - [x] Action Count (Events)
 - [x] UAW (Unique Active Wallets)
+- [x] Blobs (Beacon Chain)
 
 ## Chains
 
@@ -19,6 +20,9 @@
   - [x] Sepolia
   - [x] Rinkeby
   - [x] Mumbai
+- [x] Beacon Chain (Blobs)
+  - [x] Goerli
+  - [ ] Ethereum
 - [x] Antelope
   - [x] EOS
   - [x] WAX
@@ -43,7 +47,8 @@
     "dc7bda95b512f7b9feb17566b80fa6bca5bb1693",
     "5c3efbafc55565d66312235428daf4988a4e41dc",
     ...
-  ]
+  ],
+  "blobs": 0
 }
 ```
 
@@ -61,9 +66,9 @@ $ make gui
 graph TD;
   map_block_stats[map: map_block_stats]
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
+  sf.beacon.type.v1.Block[source: sf.beacon.type.v1.Block] --> map_block_stats
   sf.antelope.type.v1.Block[source: sf.antelope.type.v1.Block] --> map_block_stats
   sf.near.type.v1.Block[source: sf.near.type.v1.Block] --> map_block_stats
-  sf.beacon.type.v1.Block[source: sf.beacon.type.v1.Block] --> map_block_stats
   zklend.starknet.type.v1.Block[source: zklend.starknet.type.v1.Block] --> map_block_stats
   graph_out[map: graph_out]
   map_block_stats --> graph_out
@@ -90,4 +95,10 @@ Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.entity.v1.EntityChanges
 Hash: 8053a7cade8ca84faf1d3996d2102c9da436a52e
+
+Name: prom_out
+Initial block: 0
+Kind: map
+Output Type: proto:pinax.substreams.sink.prometheus.v1.PrometheusOperations
+Hash: eea553b4332bf33cb85bb9ac106bba97cc1ed126
 ```
