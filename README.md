@@ -63,16 +63,19 @@ graph TD;
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
   sf.antelope.type.v1.Block[source: sf.antelope.type.v1.Block] --> map_block_stats
   sf.near.type.v1.Block[source: sf.near.type.v1.Block] --> map_block_stats
+  sf.beacon.type.v1.Block[source: sf.beacon.type.v1.Block] --> map_block_stats
   zklend.starknet.type.v1.Block[source: zklend.starknet.type.v1.Block] --> map_block_stats
   graph_out[map: graph_out]
   map_block_stats --> graph_out
+  prom_out[map: prom_out]
+  map_block_stats --> prom_out
 ```
 
 ### Modules
 
 ```yaml
 Package name: subtivity_ethereum
-Version: v0.4.0
+Version: v0.5.0
 Doc: Subtivity for Ethereum
 Modules:
 ----
@@ -80,11 +83,11 @@ Name: map_block_stats
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.BlockStats
-Hash: 93725ab06a11557d2f157350311fb73d3ac7437e
+Hash: afad04cb610be9b544643c1c519f54ea7d2babbb
 
 Name: graph_out
 Initial block: 0
 Kind: map
 Output Type: proto:sf.substreams.sink.entity.v1.EntityChanges
-Hash: e7d70cf4655838fa71eb62869bb34356714da241
+Hash: 8053a7cade8ca84faf1d3996d2102c9da436a52e
 ```
