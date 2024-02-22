@@ -22,8 +22,10 @@
   - [x] Sepolia
   - [x] Rinkeby
   - [x] Mumbai
+  - [x] Chapel (BSC)
 - [x] Beacon Chain (Blobs)
-  - [ ] Ethereum
+  - [ ] Ethereum (March 11, 2024)
+  - [ ] Gnosis (March 13, 2024)
   - [x] Goerli
   - [x] Holesky
   - [x] Sepolia
@@ -33,7 +35,11 @@
   - [x] Telos
 - [x] Near
 - [x] Starknet
-- [ ] Aptos
+- [ ] Bitcoin
+- [ ] Cosmos
+- [ ] Osmosis
+- [ ] Optimism (OP)
+- [ ] Arweave
 
 ## Map Outputs
 
