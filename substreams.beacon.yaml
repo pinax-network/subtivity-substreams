@@ -19,8 +19,10 @@ binaries:
 protobuf:
   files:
     - subtivity.proto
+    - type.proto
   importPaths:
     - proto/v1
+    - blocks/beacon/proto/sf/beacon/type/v1
 
 modules:
   - name: map_block_stats
@@ -28,7 +30,7 @@ modules:
     binary: block_stats
     initialBlock: 0
     inputs:
-      - source: sf.ethereum.type.v2.Block
+      - source: sf.beacon.type.v1.Block
     output:
       type: proto:subtivity.v1.BlockStats
 
