@@ -6,5 +6,5 @@ message BlockStats {
   int64 transaction_traces = 1;            // number of successfully executed transactions in this block
   int64 trace_calls = 2;                   // number of successfully executed actions/trace calls in this block
   repeated string uaw = 3;                 // list of unique active wallets in this block
-  // ajouter timestamp
+  int64 blobs = 4;                         // number of eip-4844 blobs in this block
 }
