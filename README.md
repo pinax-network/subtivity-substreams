@@ -16,13 +16,17 @@
 - [x] Ethereum
   - [x] Polygon
   - [x] Binance Smart Chain
+- [x] Ethereum (Testnets)
   - [x] Goerli
+  - [x] Holesky
   - [x] Sepolia
   - [x] Rinkeby
   - [x] Mumbai
 - [x] Beacon Chain (Blobs)
-  - [x] Goerli
   - [ ] Ethereum
+  - [x] Goerli
+  - [x] Holesky
+  - [x] Sepolia
 - [x] Antelope
   - [x] EOS
   - [x] WAX
