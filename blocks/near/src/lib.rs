@@ -31,5 +31,6 @@ pub fn map_block_stats(block: Block) -> Result<BlockStats, Error> {
         transaction_traces: transaction_count,
         trace_calls: action_count,
         uaw: unique_signer_ids.into_iter().collect(),
+        blobs: 0,
     })
 }

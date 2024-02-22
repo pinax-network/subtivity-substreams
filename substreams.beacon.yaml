@@ -1,9 +1,9 @@
 specVersion: v0.1.0
 package:
-  name: subtivity_ethereum
+  name: subtivity_ethereum_beacon
   version: v0.5.0
   url: https://github.com/pinax-network/pinax-subtivity
-  doc: Subtivity for Ethereum
+  doc: Subtivity for Ethereum beacon Chain
 
 imports:
   entities: https://github.com/streamingfast/substreams-sink-entity-changes/releases/download/v1.3.0/substreams-sink-entity-changes-v1.3.0.spkg
@@ -14,7 +14,7 @@ binaries:
 
   block_stats:
     type: wasm/rust-v1
-    file: ./target/wasm32-unknown-unknown/release/subtivity_block_stats_ethereum.wasm
+    file: ./target/wasm32-unknown-unknown/release/subtivity_block_stats_ethereum_beacon.wasm
 
 protobuf:
   files:

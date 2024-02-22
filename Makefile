@@ -12,6 +12,7 @@ build:
 	cd blocks/ethereum; $(MAKE) --no-print-directory build
 	cd blocks/near; $(MAKE) --no-print-directory build
 	cd blocks/starknet; $(MAKE) --no-print-directory build
+	cd blocks/beacon; $(MAKE) --no-print-directory build
 
 .PHONY: protogen
 protogen:
@@ -21,6 +22,7 @@ protogen:
 pack:
 	substreams pack
 	substreams pack substreams.antelope.yaml
+	substreams pack substreams.beacon.yaml
 	substreams pack substreams.near.yaml
 	substreams pack substreams.starknet.yaml
 
@@ -28,6 +30,7 @@ pack:
 graph:
 	substreams graph
 	substreams graph substreams.antelope.yaml
+	substreams graph substreams.beacon.yaml
 	substreams graph substreams.near.yaml
 	substreams graph substreams.starknet.yaml
 

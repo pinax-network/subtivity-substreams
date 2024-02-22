@@ -23,5 +23,6 @@ pub fn map_block_stats(block: Block) -> Result<BlockStats, Error> {
         transaction_traces: block.transaction_traces.len() as i64,
         trace_calls,
         uaw: unique_froms.into_iter().collect(),
+        blobs: 0,
     })
 }
