@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS BlockStats  (
     blobs  Int64
 )
 ENGINE = ReplacingMergeTree()
--- primary key = trx_id + action_index --
+-- primary key = clock.id --
 PRIMARY KEY (id)
 ORDER BY (id)
