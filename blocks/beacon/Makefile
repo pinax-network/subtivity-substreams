@@ -27,4 +27,4 @@ run:
 
 .PHONY: gui
 gui:
-	substreams gui -e goerli-scdm37.mar.eosn.io:10016 map_block_stats -s 7671800 --plaintext
+	substreams gui -e goerli-scdm37b.mar.eosn.io:10016 map_block_stats -s 7671800 --plaintext

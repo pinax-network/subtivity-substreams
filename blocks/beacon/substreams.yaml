@@ -5,9 +5,6 @@ package:
   url: https://github.com/pinax-network/pinax-subtivity
   doc: Subtivity Block stats for Ethereum Beacon Chain
 
-imports:
-  beacon: https://github.com/pinax-network/firehose-beacon/releases/download/v0.1.0/beacon-v0.1.0.spkg
-
 binaries:
   default:
     type: wasm/rust-v1
