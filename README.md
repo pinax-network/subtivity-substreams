@@ -13,33 +13,36 @@
 
 ## Chains
 
-- [x] Ethereum
+- [ ] Bitcoin
+- [x] EVM
+  - [x] Ethereum
   - [x] Polygon
   - [x] Binance Smart Chain
-- [x] Ethereum (Testnets)
+  - [x] Optimism (OP)
+- [x] EVM (Testnets)
   - [x] Goerli
   - [x] Holesky
   - [x] Sepolia
   - [x] Rinkeby
   - [x] Mumbai
   - [x] Chapel (BSC)
-- [x] Beacon Chain (Blobs)
+- [x] EVM Beacon Chain (Blobs)
   - [ ] Ethereum (March 11, 2024)
   - [ ] Gnosis (March 13, 2024)
   - [x] Goerli
   - [x] Holesky
   - [x] Sepolia
+- [ ] EVM (RPC Poller)
+  - [ ] EOS EVM
 - [x] Antelope
   - [x] EOS
   - [x] WAX
   - [x] Telos
 - [x] Near
 - [x] Starknet
-- [ ] Bitcoin
-- [ ] Cosmos
-- [ ] Osmosis
-- [ ] Optimism (OP)
 - [ ] Arweave
+- [ ] ~~Cosmos~~
+  - [ ] ~~Osmosis~~
 
 ## Map Outputs
 
