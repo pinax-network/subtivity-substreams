@@ -1,6 +1,6 @@
 [package]
 name = "subtivity_block_stats_ethereum_beacon"
-version = "0.1.0"
+version = "0.1.1"
 description = "Subtivity Block stats for Ethereum Beacon Chain"
 edition = "2021"
 
