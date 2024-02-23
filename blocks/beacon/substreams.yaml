@@ -1,9 +1,12 @@
 specVersion: v0.1.0
 package:
   name: subtivity_block_stats_ethereum_beacon
-  version: v0.1.0
+  version: v0.1.1
   url: https://github.com/pinax-network/pinax-subtivity
   doc: Subtivity Block stats for Ethereum Beacon Chain
+
+imports:
+  beacon: https://github.com/pinax-network/firehose-beacon/releases/download/v0.1.0/beacon-v0.1.0.spkg
 
 binaries:
   default:
@@ -13,10 +16,8 @@ binaries:
 protobuf:
   files:
     - subtivity.proto
-    - type.proto
   importPaths:
     - ../../proto/v1
-    - ./proto/sf/beacon/type/v1
 
 modules:
   - name: map_block_stats
