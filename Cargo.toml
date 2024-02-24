@@ -30,6 +30,7 @@ prost-types = "0.11"
 substreams = "0.5"
 substreams-antelope = "0.3"
 substreams-ethereum = "0.9"
+substreams-bitcoin = "1.0"
 substreams-near = "0.9"
 
 [profile.release]
