@@ -1,0 +1,25 @@
+specVersion: v0.1.0
+package:
+  name: subtivity_block_stats_bitcoin
+  version: v0.1.0
+  url: https://github.com/pinax-network/pinax-subtivity
+  doc: Subtivity Block stats for Bitcoin
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ../../target/wasm32-unknown-unknown/release/subtivity_block_stats_bitcoin.wasm
+
+protobuf:
+  files:
+    - subtivity.proto
+  importPaths:
+    - ../../proto/v1
+
+modules:
+  - name: map_block_stats
+    kind: map
+    inputs:
+      - source: sf.bitcoin.type.v1.Block
+    output:
+      type: proto:subtivity.v1.BlockStats
