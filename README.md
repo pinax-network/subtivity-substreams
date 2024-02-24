@@ -13,7 +13,7 @@
 
 ## Chains
 
-- [ ] Bitcoin
+- [x] Bitcoin
 - [x] EVM
   - [x] Ethereum
   - [x] Polygon
@@ -79,6 +79,7 @@ $ make gui
 graph TD;
   map_block_stats[map: map_block_stats]
   sf.ethereum.type.v2.Block[source: sf.ethereum.type.v2.Block] --> map_block_stats
+  sf.bitcoin.type.v1.Block[source: sf.bitcoin.type.v1.Block] --> map_block_stats
   sf.beacon.type.v1.Block[source: sf.beacon.type.v1.Block] --> map_block_stats
   sf.antelope.type.v1.Block[source: sf.antelope.type.v1.Block] --> map_block_stats
   sf.near.type.v1.Block[source: sf.near.type.v1.Block] --> map_block_stats
