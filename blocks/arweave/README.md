@@ -28,5 +28,5 @@ Name: map_block_stats
 Initial block: 0
 Kind: map
 Output Type: proto:subtivity.v1.BlockStats
-Hash: ba5a3c8ecc0cae6f598dbdd34fb1297fee449356
+Hash: c266a67a8110c615dbab796547c3f2d36ed1c256
 ```
