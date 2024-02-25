@@ -40,7 +40,7 @@
   - [x] Telos
 - [x] Near
 - [x] Starknet
-- [ ] Arweave
+- [x] Arweave
 - [ ] ~~Cosmos~~
   - [ ] ~~Osmosis~~
 
@@ -83,6 +83,7 @@ graph TD;
   sf.beacon.type.v1.Block[source: sf.beacon.type.v1.Block] --> map_block_stats
   sf.antelope.type.v1.Block[source: sf.antelope.type.v1.Block] --> map_block_stats
   sf.near.type.v1.Block[source: sf.near.type.v1.Block] --> map_block_stats
+  sf.arweave.type.v1.Block[source: sf.arweave.type.v1.Block] --> map_block_stats
   zklend.starknet.type.v1.Block[source: zklend.starknet.type.v1.Block] --> map_block_stats
   graph_out[map: graph_out]
   map_block_stats --> graph_out

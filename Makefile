@@ -14,6 +14,7 @@ build:
 	cd blocks/starknet; $(MAKE) --no-print-directory build
 	cd blocks/beacon; $(MAKE) --no-print-directory build
 	cd blocks/bitcoin; $(MAKE) --no-print-directory build
+	cd blocks/arweave; $(MAKE) --no-print-directory build
 
 .PHONY: protogen
 protogen:
@@ -27,6 +28,7 @@ pack:
 	substreams pack substreams.near.yaml
 	substreams pack substreams.starknet.yaml
 	substreams pack substreams.bitcoin.yaml
+	substreams pack substreams.arweave.yaml
 
 .PHONY: graph
 graph:
@@ -36,6 +38,7 @@ graph:
 	substreams graph substreams.near.yaml
 	substreams graph substreams.starknet.yaml
 	substreams graph substreams.bitcoin.yaml
+	substreams graph substreams.arweave.yaml
 
 .PHONY: info
 info:
