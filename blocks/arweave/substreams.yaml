@@ -22,6 +22,6 @@ modules:
   - name: map_block_stats
     kind: map
     inputs:
-      - source: sf.beacon.type.v1.Block
+      - source: sf.arweave.type.v1.Block
     output:
       type: proto:subtivity.v1.BlockStats
