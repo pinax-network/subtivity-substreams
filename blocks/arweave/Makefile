@@ -31,5 +31,4 @@ run:
 
 .PHONY: gui
 gui:
-	# substreams gui -e arweave.substreams.pinax.network:443 map_block_stats -s 1370000 -t +100
-	substreams gui -e mainnet.arweave.streamingfast.io:443 map_block_stats -s 1370000 -t +100
+	substreams gui -e arweave.substreams.pinax.network:443 map_block_stats -s 1370000 -t +100
